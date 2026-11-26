@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國小四年級深層閱讀互動網站 - 公版模板</title>
+  <!-- 共用樣式：復古奶油／馬卡龍粉彩系 3D Q 版兒童遊戲風格 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.htm" class="logo-group">
+        <div class="logo-badge">🏰</div>
+        <div class="logo-text">
+          <h1>神奇閱讀島</h1>
+          <span>國小四年級 AI 互動閱讀教室</span>
+        </div>
+      </a>
+
+      <!-- 學生座號與姓名輸入區 -->
+      <div class="user-badge">
+        <span>🎒 座號：</span>
+        <input type="text" id="studentSeat" class="seat-input" placeholder="號碼" maxlength="3">
+        <span>姓名：</span>
+        <input type="text" id="studentName" class="name-input" placeholder="名字" maxlength="6">
+      </div>
+
+      <!-- 回首頁與功能快捷鍵 -->
+      <div class="nav-actions">
+        <a href="index.htm" class="btn-3d btn-secondary">🏠 返回首頁</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 文章標題與資訊區 -->
+    <section class="article-header">
+      <h2 id="articleTitle">載入文章中...</h2>
+      <div class="article-info-bar">
+        <span class="info-item">📚 <strong id="articleIssue">第 -- 期</strong></span>
+        <span class="info-item">✍️ 作者：<span id="articleAuthor">--</span></span>
+        <span class="info-item">📅 日期：<span id="articleDate">--</span></span>
+        <span class="info-item">⭐ 難易度：<span id="articleDifficulty">★★</span></span>
+      </div>
+    </section>
+
+    <!-- 文章閱讀區 (雙模式切換) -->
+    <section class="reading-section">
+      <div class="section-tabs">
+        <button class="tab-btn active" data-tab="tabGallery">
+          🖼️ 原始圖文排版
+        </button>
+        <button class="tab-btn" data-tab="tabText">
+          📖 清晰好讀文字
+        </button>
+      </div>
+
+      <!-- 模式一：原始雜誌圖片排版畫廊 -->
+      <div class="tab-pane" id="tabGallery" style="display: block;">
+        <div class="tab-content gallery-viewer">
+          <div class="gallery-thumbnails" id="galleryThumbs">
+            <!-- 縮圖動態渲染或靜態置入 -->
+          </div>
+          <div class="gallery-main">
+            <img id="mainGalleryImg" src="" alt="文章內容放大預覽">
+          </div>
+        </div>
+      </div>
+
+      <!-- 模式二：清晰好讀文字 (附朗讀與字級) -->
+      <div class="tab-pane" id="tabText" style="display: none;">
+        <div class="tab-content">
+          <div class="reader-controls">
+            <div class="font-size-group">
+              <span>🔤 文字大小：</span>
+              <button class="font-btn active" data-size="normal">正常</button>
+              <button class="font-btn" data-size="large">放大</button>
+              <button class="font-btn" data-size="xlarge">超大</button>
+            </div>
+            <div class="tts-group">
+              <button class="btn-3d btn-lemon" id="ttsPlayBtn">🔊 全文朗讀</button>
+              <button class="btn-3d btn-secondary" id="ttsStopBtn">⏹️ 停止</button>
+            </div>
+          </div>
+
+          <article class="text-reader font-normal" id="textReader">
+            <!-- 文章段落內容將在此渲染 -->
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主題互動小遊戲 -->
+    <section class="game-section">
+      <div class="game-header">
+        <h3>🎮 <span id="gameTitle">主題互動探索遊戲</span></h3>
+        <span class="tag-badge tag-game">遊戲闖關</span>
+      </div>
+      <div class="game-container">
+        <div class="clock-stage">
+          <span class="gear-item gear-left">⚙️</span>
+          <span class="gear-item gear-right">⚙️</span>
+          
+          <div class="clock-dial" id="gameClockDial">
+            <span class="dial-star" style="top: 15px; left: 120px;">☀️</span>
+            <span class="dial-star" style="bottom: 15px; left: 120px;">🌙</span>
+            <span class="dial-star" style="left: 15px; top: 120px;">♈</span>
+            <span class="dial-star" style="right: 15px; top: 120px;">♎</span>
+            <div class="clock-hand" id="gameClockHand"></div>
+            <div class="clock-center-pin"></div>
+          </div>
+        </div>
+
+        <div class="game-controls">
+          <button class="btn-3d btn-lemon" id="gameSpinBtn">🔄 轉動天文星象齒輪</button>
+          <button class="btn-3d btn-coral" id="gameRoosterBtn">🔔 觸發整點報時秀！</button>
+        </div>
+
+        <div class="game-message-box" id="gameMessage">
+          點擊上方按鈕，體驗天文鐘齒輪嚙合與整點金雞報時秀的精巧設計！
+        </div>
+      </div>
+    </section>
+
+    <!-- 深層閱讀四層次測驗區 (16 題) -->
+    <section class="quiz-section">
+      <div class="quiz-header">
+        <h3>🎯 深層閱讀四層次闖關測驗</h3>
+        <span class="tag-badge tag-reading">全方位 16 題選擇題</span>
+      </div>
+
+      <!-- 四層次快速切換鈕 -->
+      <div class="level-nav">
+        <button class="level-pill active" data-level="all">🌟 全部題目 (16)</button>
+        <button class="level-pill" data-level="1">🔍 第一層：字面理解 (4)</button>
+        <button class="level-pill" data-level="2">💡 第二層：推論理解 (4)</button>
+        <button class="level-pill" data-level="3">⚖️ 第三層：批判評價 (4)</button>
+        <button class="level-pill" data-level="4">🚀 第四層：應用創造 (4)</button>
+      </div>
+
+      <!-- 題目渲染清單 -->
+      <div id="quizList">
+        <!-- 題目由 script.js 自動載入 -->
+      </div>
+    </section>
+
+    <!-- 開放式思考題 (深度探究) 與 50 字防呆 -->
+    <section class="open-ended-section">
+      <div class="open-header">
+        <span style="font-size: 28px;">💭</span>
+        <h3>開放式思考題（深度探究）</h3>
+      </div>
+
+      <div class="open-prompt-box" id="openEndedPrompt">
+        思考題提示內容載入中...
+      </div>
+
+      <textarea id="openEndedInput" class="open-textarea" placeholder="請在此寫下你的精彩想法，分享你的生活經驗與豐富創意...（至少滿 50 字才能送出喔！）"></textarea>
+
+      <!-- 50 字即時狀態與防呆提醒條 -->
+      <div class="char-counter-bar">
+        <div id="openEndedStatus" class="char-status under">
+          ✏️ 目前寫了 <strong>0</strong> 個字，再多寫 <strong>50</strong> 個字就能分享你的思考囉！加油，你可以的！✨
+        </div>
+        <button id="openEndedSubmitBtn" class="btn-3d btn-mint btn-disabled" disabled>
+          🚀 送出我的思考
+        </button>
+      </div>
+
+      <!-- 智慧評分結果卡片 -->
+      <div class="grading-result-card" id="openEndedResultCard">
+        <!-- 評分結果將在此動態顯示 -->
+      </div>
+    </section>
+
+    <!-- 學習成果統計與成績單匯出 -->
+    <section class="report-section">
+      <div class="section-title">
+        <h3>📊 學習成果與證書</h3>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">選擇題答對率</div>
+          <div class="stat-value" id="statCorrectCount">0 / 16</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">測驗總得分</div>
+          <div class="stat-value" id="statTotalScore">0 分</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">作答進度</div>
+          <div class="stat-value" id="statAnsweredProgress">0 / 16</div>
+        </div>
+      </div>
+
+      <!-- 榮譽證書與成績單預覽 (適合截圖與列印) -->
+      <div class="certificate-preview" id="certificateArea">
+        <div class="cert-header">
+          <h4>🏆 國小深層閱讀小達人 · 學習證書 🏆</h4>
+          <p>恭喜完成本篇深度閱讀挑戰，展現優秀的思考與探索力！</p>
+        </div>
+
+        <div class="cert-student-info">
+          <span>🎒 座號：<strong class="display-seat">--</strong></span>
+          <span>👦 姓名：<strong class="display-name">同學</strong></span>
+        </div>
+
+        <div class="cert-content">
+          <p>📝 <strong>四層次閱讀測驗成果：</strong><span id="certQuizScore">尚未完成</span></p>
+          <p>💡 <strong>開放式思考題評定：</strong><span id="certOpenScore">尚未評定</span></p>
+          <div style="margin: 12px 0; background: #FFF9ED; padding: 12px; border-radius: 8px; border-left: 4px solid #F59E0B;">
+            <strong>💬 學生思考作答：</strong>
+            <p id="certOpenText" style="margin-top: 6px; font-style: italic;">（送出思考題後將在此顯示）</p>
+          </div>
+          <p>👨‍🏫 <strong>老師智慧回饋評語：</strong><span id="certTeacherFeedback">完成思考題後自動生成</span></p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap;">
+        <button class="btn-3d btn-primary" id="exportCsvBtn">📥 匯出學習成績 (CSV)</button>
+        <button class="btn-3d btn-secondary" id="printCertBtn">🖨️ 列印 / 存為PDF學習證明</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>🌟 國小四年級深層閱讀互動教材產生系統 · 讓每個孩子愛上思考與閱讀 🌟</p>
+  </footer>
+
+  <!-- 共用互動腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 文章資料設定 (由 AI 依最新 PDF 自動填入) -->
+  <script>
+    // 預設公版佔位資料
+    window.ARTICLE_DATA = window.ARTICLE_DATA || null;
+  </script>
+</body>
+</html>

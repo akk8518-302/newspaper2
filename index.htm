@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>神奇閱讀島 - 國小四年級 AI 深層閱讀互動網站</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.htm" class="logo-group">
+        <div class="logo-badge">🏰</div>
+        <div class="logo-text">
+          <h1>神奇閱讀島</h1>
+          <span>國小四年級 AI 互動閱讀教室</span>
+        </div>
+      </a>
+      <div class="user-badge">
+        <span>🎒 座號：</span>
+        <input type="text" id="studentSeat" class="seat-input" placeholder="號碼" maxlength="3">
+        <span>姓名：</span>
+        <input type="text" id="studentName" class="name-input" placeholder="名字" maxlength="6">
+      </div>
+      <div class="nav-actions">
+        <span class="tag-badge tag-grade">⭐ 國小四年級專用</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="hero-banner">
+      <div class="hero-text">
+        <h2>歡迎來到「神奇閱讀島」！🎒✨</h2>
+        <p>在這裡，每一篇精選文章都變成了有趣的冒險島嶼！讀懂好故事、挑戰四層次思維闖關題、體驗好玩的主題互動小遊戲，一起成為閱讀探險家吧！</p>
+        <div class="hero-badge-row">
+          <span class="tag-badge tag-reading">🎯 16 題深層閱讀四層次測驗</span>
+          <span class="tag-badge tag-game">🎮 主題互動探索遊戲</span>
+          <span class="tag-badge tag-grade">💭 50字深度探究與智慧評分</span>
+          <span class="tag-badge" style="background: #FFE4E6; color: #BE123C;">📊 學習歷程與 CSV 成績匯出</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-title">
+        <h3>📚 精選探索課程清單</h3>
+        <span class="tag-badge tag-grade" id="courseTotalCount">共 3 篇精采閱讀</span>
+      </div>
+
+      <div class="courses-grid" id="coursesGrid">
+
+        <!-- 第 1 篇：什麼是天文鐘？ -->
+        <div class="course-card">
+          <div class="card-cover">
+            <img src="article1_page1.png" alt="什麼是天文鐘？ 封面圖片">
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span>【得報】第80期「說明」專欄</span>
+              <span>⭐ 難度 ★★</span>
+            </div>
+            <h4 class="card-title">什麼是天文鐘？</h4>
+            <p class="card-desc">你知道600多年前歐洲發明的天文鐘，是如何把整個宇宙星象裝進時鐘裡的嗎？快來探索神奇齒輪、骷髏人與金雞的整點報時秀！</p>
+            <div class="card-footer">
+              <span style="font-size: 0.85rem; font-weight: 700; color: #15803D;">🎮 齒輪與星象冒險</span>
+              <a href="index2.html" class="btn-3d btn-primary">🚀 開始閱讀闖關</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 第 2 篇：一起去鹽田 -->
+        <div class="course-card">
+          <div class="card-cover">
+            <img src="article2_page1.png" alt="一起去鹽田 封面圖片">
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span>【得報】第79期「圖表」專欄</span>
+              <span>⭐ 難度 ★★★</span>
+            </div>
+            <h4 class="card-title">一起去鹽田</h4>
+            <p class="card-desc">走進臺南北門200年歷史的井仔腳瓦盤鹽田！跟著阿公和小峻一起探索陽光、海風、潮汐與碎瓦片如何變出潔白海鹽的古老智慧！</p>
+            <div class="card-footer">
+              <span style="font-size: 0.85rem; font-weight: 700; color: #15803D;">🎮 小小鹽工日晒大冒險</span>
+              <a href="index3.html" class="btn-3d btn-primary">🚀 開始閱讀闖關</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 第 3 篇：噓！角鴞聽見了海的約定 -->
+        <div class="course-card">
+          <div class="card-cover">
+            <img src="article3_page1.png" alt="噓！角鴞聽見了海的約定 封面圖片">
+          </div>
+          <div class="card-body">
+            <div class="card-meta">
+              <span>【得報】第85期「說明」專欄</span>
+              <span>⭐ 難度 ★★</span>
+            </div>
+            <h4 class="card-title">噓！角鴞聽見了海的約定</h4>
+            <p class="card-desc">跟著小馬搭船回蘭嶼，聆聽角鴞守護者的鳴叫，走進達悟族半穴居地下屋、體驗飛魚季的分工與感恩，許下屬於島嶼的永恆約定！</p>
+            <div class="card-footer">
+              <span style="font-size: 0.85rem; font-weight: 700; color: #15803D;">🎮 角鴞與海的約定探索</span>
+              <a href="index4.html" class="btn-3d btn-primary">🚀 開始閱讀闖關</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section style="margin-top: 45px; background: #FFF; border: 3px solid #FFF; border-radius: var(--radius-lg); padding: 28px; box-shadow: var(--shadow-clay);">
+      <h3 style="color: #7C2D12; font-size: 1.3rem; margin-bottom: 15px; font-weight: 800;">💡 給老師與小朋友的學習指南</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+        <div style="background: #FFFDF9; border: 2px solid var(--border-soft); border-radius: var(--radius-sm); padding: 16px;">
+          <h4 style="color: #B45309; margin-bottom: 8px;">1. 雙模式自在閱讀</h4>
+          <p style="font-size: 0.92rem; color: var(--text-muted);">可自由切換「原版圖文排版」欣賞精美插圖，或使用「清晰好讀區」搭配語音朗讀與字級放大。</p>
+        </div>
+        <div style="background: #FFFDF9; border: 2px solid var(--border-soft); border-radius: var(--radius-sm); padding: 16px;">
+          <h4 style="color: #B45309; margin-bottom: 8px;">2. 四層次階梯式思維</h4>
+          <p style="font-size: 0.92rem; color: var(--text-muted);">循序漸進挑戰「字面理解」、「推論理解」、「批判評價」到「應用創造」，每題皆附詳解與文章依據。</p>
+        </div>
+        <div style="background: #FFFDF9; border: 2px solid var(--border-soft); border-radius: var(--radius-sm); padding: 16px;">
+          <h4 style="color: #B45309; margin-bottom: 8px;">3. 50字深度探究與智慧評分</h4>
+          <p style="font-size: 0.92rem; color: var(--text-muted);">結合生活經驗寫下開放想法，具備即時字數防呆與智慧診斷，給予專屬評語與等第。</p>
+        </div>
+        <div style="background: #FFFDF9; border: 2px solid var(--border-soft); border-radius: var(--radius-sm); padding: 16px;">
+          <h4 style="color: #B45309; margin-bottom: 8px;">4. 一鍵成績匯出與列印</h4>
+          <p style="font-size: 0.92rem; color: var(--text-muted);">支援學生座號、姓名與作答歷程完整匯出 CSV，或直接列印專屬學習證書。</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>🌟 國小四年級深層閱讀互動教材產生系統 · 讓每個孩子愛上思考與閱讀 🌟</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    fetch('manifest.json')
+      .then(res => res.json())
+      .then(courses => {
+        if (!courses || !courses.length) return;
+        const grid = document.getElementById('coursesGrid');
+        const countEl = document.getElementById('courseTotalCount');
+        if (countEl) countEl.textContent = `共 ${courses.length} 篇精采閱讀`;
+
+        grid.innerHTML = courses.map(c => `
+          <div class="course-card">
+            <div class="card-cover">
+              <img src="${c.cover || 'article1_page1.png'}" alt="${c.title} 封面圖片">
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span>${c.issue}</span>
+                <span>⭐ 難度 ${c.difficulty}</span>
+              </div>
+              <h4 class="card-title">${c.title}</h4>
+              <p class="card-desc">${c.description}</p>
+              <div class="card-footer">
+                <span style="font-size: 0.85rem; font-weight: 700; color: #15803D;">🎮 ${c.gameTitle}</span>
+                <a href="${c.file}" class="btn-3d btn-primary">🚀 開始閱讀闖關</a>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      })
+      .catch(err => {
+        console.log('Using static courses grid fallback.');
+      });
+  </script>
+</body>
+</html>

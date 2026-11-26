@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一起去鹽田 - 國小四年級深層閱讀互動網站</title>
+  <!-- 共用樣式：復古奶油／馬卡龍粉彩系 3D Q 版兒童遊戲風格 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.htm" class="logo-group">
+        <div class="logo-badge">🏰</div>
+        <div class="logo-text">
+          <h1>神奇閱讀島</h1>
+          <span>國小四年級 AI 互動閱讀教室</span>
+        </div>
+      </a>
+
+      <!-- 學生座號與姓名輸入區 -->
+      <div class="user-badge">
+        <span>🎒 座號：</span>
+        <input type="text" id="studentSeat" class="seat-input" placeholder="號碼" maxlength="3">
+        <span>姓名：</span>
+        <input type="text" id="studentName" class="name-input" placeholder="名字" maxlength="6">
+      </div>
+
+      <!-- 回首頁與功能快捷鍵 -->
+      <div class="nav-actions">
+        <a href="index.htm" class="btn-3d btn-secondary">🏠 返回首頁</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 文章標題與資訊區 -->
+    <section class="article-header">
+      <h2 id="articleTitle">一起去鹽田</h2>
+      <div class="article-info-bar">
+        <span class="info-item">📚 <strong id="articleIssue">【得報】第79期「圖表」專欄</strong></span>
+        <span class="info-item">✍️ 作者：<span id="articleAuthor">小烏龜</span></span>
+        <span class="info-item">📅 日期：<span id="articleDate">2026年8月14日</span></span>
+        <span class="info-item">⭐ 難易度：<span id="articleDifficulty">★★★</span></span>
+      </div>
+    </section>
+
+    <!-- 文章閱讀區 (雙模式切換) -->
+    <section class="reading-section">
+      <div class="section-tabs">
+        <button class="tab-btn active" data-tab="tabGallery">
+          🖼️ 原始圖文排版
+        </button>
+        <button class="tab-btn" data-tab="tabText">
+          📖 清晰好讀文字
+        </button>
+      </div>
+
+      <!-- 模式一：原始雜誌圖片排版畫廊 -->
+      <div class="tab-pane" id="tabGallery" style="display: block;">
+        <div class="tab-content gallery-viewer">
+          <div class="gallery-thumbnails" id="galleryThumbs">
+            <button class="thumb-btn active" data-img="article2_page1.png">
+              <img src="article2_page1.png" alt="第1頁 縮圖">
+            </button>
+            <button class="thumb-btn" data-img="article2_page2.png">
+              <img src="article2_page2.png" alt="第2頁 縮圖">
+            </button>
+            <button class="thumb-btn" data-img="article2_page3.png">
+              <img src="article2_page3.png" alt="第3頁 縮圖">
+            </button>
+          </div>
+          <div class="gallery-main">
+            <img id="mainGalleryImg" src="article2_page1.png" alt="文章內容放大預覽">
+          </div>
+        </div>
+      </div>
+
+      <!-- 模式二：清晰好讀文字 (附朗讀與字級) -->
+      <div class="tab-pane" id="tabText" style="display: none;">
+        <div class="tab-content">
+          <div class="reader-controls">
+            <div class="font-size-group">
+              <span>🔤 文字大小：</span>
+              <button class="font-btn active" data-size="normal">正常</button>
+              <button class="font-btn" data-size="large">放大</button>
+              <button class="font-btn" data-size="xlarge">超大</button>
+            </div>
+            <div class="tts-group">
+              <button class="btn-3d btn-lemon" id="ttsPlayBtn">🔊 全文朗讀</button>
+              <button class="btn-3d btn-secondary" id="ttsStopBtn">⏹️ 停止</button>
+            </div>
+          </div>
+
+          <article class="text-reader font-normal" id="textReader">
+            <!-- 文章段落由 ARTICLE_DATA 自動注入 -->
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主題互動小遊戲：井仔腳鹽田：小小鹽工日晒大冒險 -->
+    <section class="game-section">
+      <div class="game-header">
+        <h3>🎮 <span id="gameTitle">井仔腳鹽田：小小鹽工日晒大冒險</span></h3>
+        <span class="tag-badge tag-game">四年級探索闖關</span>
+      </div>
+      <div class="game-container">
+        <div class="clock-stage" style="background: radial-gradient(circle, #0284C7 0%, #0369A1 60%, #075985 100%); border-radius: var(--radius-md); border: 4px solid #FDE047;">
+          <div id="saltFieldStage" style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+            <div id="saltSun" style="position: absolute; top: 20px; right: 30px; font-size: 48px; transition: transform 0.5s ease; filter: drop-shadow(0 0 15px #FDE047);">☀️</div>
+            <div id="saltWind" style="position: absolute; top: 35px; left: 30px; font-size: 38px; animation: floatBounce 3s infinite;">🌊</div>
+            
+            <div id="saltPond" style="width: 220px; height: 180px; background: #38BDF8; border: 6px solid #CBD5E1; border-radius: 16px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 0 4px 12px rgba(0,0,0,0.3);">
+              <div id="saltTiles" style="width: 100%; height: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; padding: 4px; background: #94A3B8;">
+                <div style="background: #E2E8F0; border-radius: 2px;"></div>
+                <div style="background: #CBD5E1; border-radius: 2px;"></div>
+                <div style="background: #E2E8F0; border-radius: 2px;"></div>
+                <div style="background: #CBD5E1; border-radius: 2px;"></div>
+                <div style="background: #CBD5E1; border-radius: 2px;"></div>
+                <div style="background: #E2E8F0; border-radius: 2px;"></div>
+                <div style="background: #CBD5E1; border-radius: 2px;"></div>
+                <div style="background: #E2E8F0; border-radius: 2px;"></div>
+              </div>
+              <div id="saltCrystals" style="position: absolute; font-size: 36px; display: none; animation: floatBounce 2s infinite;">✨ 🧂 ✨</div>
+              <div id="saltMountain" style="position: absolute; bottom: 5px; font-size: 42px; display: none;">⛰️</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="game-controls">
+          <button class="btn-3d btn-secondary" id="gameStep1Btn">🌊 步驟 1：開閘引水納潮</button>
+          <button class="btn-3d btn-lemon" id="gameStep2Btn">☀️ 步驟 2：陽光曝晒結晶</button>
+          <button class="btn-3d btn-coral" id="gameStep3Btn">🌾 步驟 3：鹽耙刮鹽堆小山</button>
+        </div>
+
+        <div class="game-message-box" id="gameMessage">
+          點擊上方步驟按鈕，體驗老祖先利用陽光、海風與碎瓦片日晒海鹽的神奇流程！
+        </div>
+      </div>
+    </section>
+
+    <!-- 深層閱讀四層次測驗區 (16 題) -->
+    <section class="quiz-section">
+      <div class="quiz-header">
+        <h3>🎯 深層閱讀四層次闖關測驗</h3>
+        <span class="tag-badge tag-reading">全方位 16 題選擇題</span>
+      </div>
+
+      <!-- 四層次快速切換鈕 -->
+      <div class="level-nav">
+        <button class="level-pill active" data-level="all">🌟 全部題目 (16)</button>
+        <button class="level-pill" data-level="1">🔍 第一層：字面理解 (4)</button>
+        <button class="level-pill" data-level="2">💡 第二層：推論理解 (4)</button>
+        <button class="level-pill" data-level="3">⚖️ 第三層：批判評價 (4)</button>
+        <button class="level-pill" data-level="4">🚀 第四層：應用創造 (4)</button>
+      </div>
+
+      <!-- 題目渲染清單 -->
+      <div id="quizList">
+        <!-- 題目由 script.js 渲染 -->
+      </div>
+    </section>
+
+    <!-- 開放式思考題 (深度探究) 與 50 字防呆 -->
+    <section class="open-ended-section">
+      <div class="open-header">
+        <span style="font-size: 28px;">💭</span>
+        <h3>開放式思考題（深度探究）</h3>
+      </div>
+
+      <div class="open-prompt-box" id="openEndedPrompt">
+        思考題提示內容載入中...
+      </div>
+
+      <textarea id="openEndedInput" class="open-textarea" placeholder="請在此寫下你的精彩想法，分享你的生活經驗與豐富創意...（請至少寫滿 50 個字，完成後才能點擊送出喔！）"></textarea>
+
+      <!-- 50 字即時狀態與防呆提醒條 -->
+      <div class="char-counter-bar">
+        <div id="openEndedStatus" class="char-status under">
+          ✏️ 目前寫了 <strong>0</strong> 個字，再多寫 <strong>50</strong> 個字就能分享你的思考囉！加油，你可以的！✨
+        </div>
+        <button id="openEndedSubmitBtn" class="btn-3d btn-mint btn-disabled" disabled>
+          🚀 送出我的思考
+        </button>
+      </div>
+
+      <!-- 智慧評分結果卡片 -->
+      <div class="grading-result-card" id="openEndedResultCard">
+        <!-- 評分結果將在此動態顯示 -->
+      </div>
+    </section>
+
+    <!-- 學習成果統計與成績單匯出 -->
+    <section class="report-section">
+      <div class="section-title">
+        <h3>📊 學習成果與證書</h3>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">選擇題答對率</div>
+          <div class="stat-value" id="statCorrectCount">0 / 16</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">測驗總得分</div>
+          <div class="stat-value" id="statTotalScore">0 分</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">作答進度</div>
+          <div class="stat-value" id="statAnsweredProgress">0 / 16</div>
+        </div>
+      </div>
+
+      <!-- 榮譽證書與成績單預覽 (適合截圖與列印) -->
+      <div class="certificate-preview" id="certificateArea">
+        <div class="cert-header">
+          <h4>🏆 國小深層閱讀小達人 · 學習證書 🏆</h4>
+          <p>恭喜完成本篇深度閱讀挑戰，展現優秀的思考與探索力！</p>
+        </div>
+
+        <div class="cert-student-info">
+          <span>🎒 座號：<strong class="display-seat">--</strong></span>
+          <span>👦 姓名：<strong class="display-name">同學</strong></span>
+        </div>
+
+        <div class="cert-content">
+          <p>📝 <strong>四層次閱讀測驗成果：</strong><span id="certQuizScore">尚未完成</span></p>
+          <p>💡 <strong>開放式思考題評定：</strong><span id="certOpenScore">尚未評定</span></p>
+          <div style="margin: 12px 0; background: #FFF9ED; padding: 12px; border-radius: 8px; border-left: 4px solid #F59E0B;">
+            <strong>💬 學生思考作答：</strong>
+            <p id="certOpenText" style="margin-top: 6px; font-style: italic;">（送出思考題後將在此顯示）</p>
+          </div>
+          <p>👨‍🏫 <strong>老師智慧回饋評語：</strong><span id="certTeacherFeedback">完成思考題後自動生成</span></p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap;">
+        <button class="btn-3d btn-primary" id="exportCsvBtn">📥 匯出學習成績 (CSV)</button>
+        <button class="btn-3d btn-secondary" id="printCertBtn">🖨️ 列印 / 存為PDF學習證明</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>🌟 國小四年級深層閱讀互動教材產生系統 · 讓每個孩子愛上思考與閱讀 🌟</p>
+  </footer>
+
+  <!-- 共用互動腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 本篇文章專屬資料設定 -->
+  <script>
+    window.ARTICLE_DATA = {
+      id: 2,
+      title: "一起去鹽田",
+      issue: "【得報】第79期「圖表」專欄",
+      author: "小烏龜",
+      date: "2026年8月14日",
+      difficulty: "★★★",
+      gameTitle: "井仔腳鹽田：小小鹽工日晒大冒險",
+      paragraphs: [
+        {
+          tag: "段落 [P1]",
+          title: "晨光下的井仔腳瓦盤鹽田",
+          content: "暑假的清晨，天還沒完全亮，小峻就被阿公叫醒了。「走，跟阿公去鹽田！」小峻揉揉眼睛，跟著阿公來到臺南北門的井仔腳瓦盤鹽田。海風迎面吹來，鹽田在晨光下閃著銀白色的光芒，美得讓他忘了睡意。「阿公，這些鹽是怎麼做出來的？」小峻好奇地問。"
+        },
+        {
+          tag: "段落 [P2]",
+          title: "水分蒸發與閃亮的結晶",
+          content: "阿公蹲下來，指著遠處的水閘說：「你看，漲潮的時候，我們先把海水引進來，讓它慢慢在大池子裡蒸發。」他帶著小峻走過一格一格的池子，「水分蒸發後，海水會變得越來越鹹、越來越濃，最後流進這裡……」阿公指著腳下鋪著碎瓦片的結晶池，「太陽繼續晒，鹽就會一點一點結晶在瓦片上。」小峻蹲下來仔細看，果然看見瓦片上閃閃發亮的白色小顆粒。「哇！真的吔！那接下來呢？」"
+        },
+        {
+          tag: "段落 [P3]",
+          title: "老祖先留下的兩百年智慧",
+          content: "阿公拿起一把長柄的鹽耙，示範著把鹽輕輕刮起來，堆成一座小小的白色山丘。「刮完之後，讓多餘的水分滴乾，再用扁擔挑進鹽倉，就完成囉！」小峻看著眼前這片靠著太陽和海風就能生產鹽巴的神奇土地，忍不住說：「阿公，這製作流程好聰明呵！」阿公笑著點點頭：「這片鹽田已經兩百多年了，是老祖先留給我們的智慧。」"
+        },
+        {
+          tag: "段落 [P4]",
+          title: "圖解六大步驟：海水變變變",
+          content: "【傳統日晒鹽製作流程】：<br>① 引水 (納潮)：漲潮時將乾淨海水引入大蒸發池。<br>② 蒸發與滷化：海水經大、小蒸發池與滷缸，藉陽光曝晒與海風吹拂，濃縮為高濃度滷水。<br>③ 結晶：滷水引入鋪滿碎瓦片的瓦盤結晶池，陽光照射讓水分蒸發，純白海鹽結晶在瓦片上。<br>④ 收鹽 (刮鹽)：結晶完成後，鹽工使用「鹽耙」將粗鹽人工刮出、堆疊成小鹽山。<br>⑤ 堆鹽成小山：讓多餘水分自然滴落。<br>⑥ 挑鹽入倉：最後用扁擔挑起鹽，運送到鹽倉中保存。"
+        },
+        {
+          tag: "段落 [P5]",
+          title: "鹽田小知識：為什麼要用瓦片？",
+          content: "井仔腳瓦盤鹽田已有超過 200 年的歷史，是臺南珍貴的文化資產呵！為什麼結晶池底部要鋪瓦片呢？因為碎瓦片可以吸熱，幫助水分更快蒸發，還能隔絕泥土，讓收穫的海鹽更加純淨、白皙！"
+        }
+      ],
+      openEndedPrompt: "💡 深度探究題目：阿公說：『這片鹽田已經兩百多年了，是老祖先留給我們的智慧。』如果學校要舉辦文化體驗週，由你擔任『井仔腳鹽田小小代言人』，你會如何向大家介紹這項結合『陽光、海風、潮汐與碎瓦片』的古老技術？請結合你在課文中學到的日晒鹽步驟或生活經驗，寫下你的介紹詞或創意推廣點子吧！（請至少寫滿 50 個字，輸入框會自動過濾空格喔！）",
+      questions: [
+        // 第一層：字面理解 (4題)
+        {
+          id: 1,
+          level: 1,
+          question: "小峻在暑假的清晨，跟著阿公來到的是位於臺灣哪一個地方的知名瓦盤鹽田？",
+          options: [
+            "彰化鹿港的濱海鹽田",
+            "新北淡水的紅樹林旁",
+            "臺南北門的井仔腳瓦盤鹽田",
+            "屏東恆春的珊瑚礁海岸"
+          ],
+          correct: 3,
+          explanation: "文章第一段明確指出，阿公帶著小峻來到的是「臺南北門的井仔腳瓦盤鹽田」。",
+          quote: "段落[P1]：「小峻揉揉眼睛，跟著阿公來到臺南北門的井仔腳瓦盤鹽田。」"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "在傳統日晒鹽的六大製作流程中，第一步「引水（納潮）」通常是在什麼時候將乾淨海水引進大蒸發池？",
+          options: [
+            "海水漲潮的時候",
+            "海水退潮到最低的時候",
+            "夏天下大暴雨的時候",
+            "冬天颳起強烈東北季風的時候"
+          ],
+          correct: 1,
+          explanation: "文中阿公說明與圖表流程第1步均指出，納潮引水是利用海水「漲潮的時候」把乾淨海水引進來。",
+          quote: "段落[P2]與[P4]：「阿公指著遠處的水閘說：你看，漲潮的時候，我們先把海水引進來……」"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "鹽工在收鹽（刮鹽）時，手上示範拿著用來把粗鹽輕輕刮起的長柄工具稱為什麼？",
+          options: [
+            "翻土用的長柄鐵鏟",
+            "長柄的「鹽耙」",
+            "清掃落葉的竹掃帚",
+            "捕魚用的大型手拋網"
+          ],
+          correct: 2,
+          explanation: "課文第二段與流程步驟4均清楚說明，鹽工會使用長柄的「鹽耙」將結晶的粗鹽人工刮出並堆疊成小山。",
+          quote: "段落[P3]與[P4]：「阿公拿起一把長柄的鹽耙，示範著把鹽輕輕刮起來，堆成一座小小的白色山丘。」"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "根據文章對話與圖表小知識介紹，臺南北門的井仔腳瓦盤鹽田大約已有多少年的歷史？",
+          options: [
+            "剛建造50多年",
+            "大約100年歷史",
+            "超過500年的歷史",
+            "已有超過200年的歷史"
+          ],
+          correct: 4,
+          explanation: "阿公提到「這片鹽田已經兩百多年了」，圖表小知識也註明「已有超過200年的歷史，是臺南珍貴的文化資產」。",
+          quote: "段落[P3]與[P5]：「這片鹽田已經兩百多年了，是老祖先留給我們的智慧……井仔腳瓦盤鹽田已有超過200年的歷史。」"
+        },
+
+        // 第二層：推論理解 (4題)
+        {
+          id: 5,
+          level: 2,
+          question: "為什麼結晶池底部要特別「鋪著碎瓦片」，而不是直接在原本的泥土地上曝晒海水？",
+          options: [
+            "因為泥土太軟容易把工人的雨鞋黏住",
+            "碎瓦片可以吸熱加速水分蒸發，還能阻隔泥土讓海鹽更純淨白皙",
+            "瓦片表面光滑，方便小朋友在上面溜滑梯玩耍",
+            "為了讓晒出來的海鹽帶有一股燒烤紅磚瓦的香氣"
+          ],
+          correct: 2,
+          explanation: "課文第五段與圖表右下方小知識特別說明：「瓦片可以吸熱，幫助水分蒸發，還能讓海鹽更純淨、白皙！」",
+          quote: "段落[P5]：「為什麼結晶池底部要鋪瓦片呢？因為碎瓦片可以吸熱，幫助水分更快蒸發，還能隔絕泥土，讓收穫的海鹽更加純淨、白皙！」"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "在收鹽之後，鹽工為什麼要把刮出來的粗鹽「堆成一座座小鹽山」，而不直接挑進鹽倉中？",
+          options: [
+            "單純為了造型漂亮，吸引更多外地觀光客打卡拍照",
+            "為了方便工人在小鹽山頂端插上標籤寫上名字",
+            "為了讓粗鹽中殘留的多餘水分能夠自然滴落瀝乾",
+            "等候夜間的露水再度融化鹽巴以重新結晶"
+          ],
+          correct: 3,
+          explanation: "阿公說明「刮完之後，讓多餘的水分滴乾」，流程圖步驟5也強調「堆成一座座小鹽山，讓多餘的水分自然滴落」。",
+          quote: "段落[P3]與[P4]：「刮完之後，讓多餘的水分滴乾，再用扁擔挑進鹽倉……步驟⑤堆成一座座小鹽山，讓多餘的水分自然滴落。」"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "文中提到日晒鹽是「靠著太陽和海風就能生產鹽巴的神奇土地」，這說明了傳統鹽業主要仰賴什麼力量？",
+          options: [
+            "燃燒煤炭發電的大型熱風機烘乾",
+            "在海水中加入化學凝固粉讓鹽瞬間凝固",
+            "深層地底高溫溫泉滾燙煮沸海水",
+            "順應氣候節奏，藉由陽光曝晒與海風吹拂的天然蒸發濃縮力量"
+          ],
+          correct: 4,
+          explanation: "課文中多次強調利用陽光曝晒與海風吹拂，將水分蒸發濃縮成滷水最後結晶，是順應天地的綠色自然智慧。",
+          quote: "段落[P3]與[P4]：「小峻看著眼前這片靠著太陽和海風就能生產鹽巴的神奇土地……藉由陽光曝晒與海風吹拂，逐漸濃縮為高濃度的滷水。」"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "文章第一段寫道「暑假的清晨，天還沒完全亮，小峻就被阿公叫醒了」，推論鹽工為什麼要這麼早去鹽田？",
+          options: [
+            "趁清晨天氣涼爽巡視水閘與鹽田，避免正午烈日灼傷，並迎接清晨開始的日晒蒸發",
+            "阿公因為睡不著覺，想找小峻到海邊比賽抓螃蟹",
+            "因為鹽巴只有在完全黑暗時才會生長，太陽一出來鹽就會融化",
+            "為了趁鹽警還沒上班前偷偷去海邊裝海水回家"
+          ],
+          correct: 1,
+          explanation: "南臺灣夏季氣候炎熱，傳統鹽田勞作多在清晨微涼時展開，且清晨晨光與海風也是開始引水曝晒的好時機。",
+          quote: "段落[P1]：「暑假的清晨，天還沒完全亮……海風迎面吹來，鹽田在晨光下閃著銀白色的光芒……」"
+        },
+
+        // 第三層：批判評價 (4題)
+        {
+          id: 9,
+          level: 3,
+          question: "本文在說明傳統日晒鹽時，設計了「圖表漫畫流程圖（步驟1到6）」，從資訊傳遞的角度來看，這種安排有何優點？",
+          options: [
+            "透過圖像步驟拆解與簡要說明，能讓四年級讀者一眼掌握工序順序與因果關聯，降低閱讀門檻",
+            "只是一種裝飾手法，對於理解鹽田運作沒有任何幫助",
+            "目的是為了讓讀者可以跳過前兩段的故事內容不用閱讀",
+            "這種格式主要是為了方便科學家拿去發表專業化學論文"
+          ],
+          correct: 1,
+          explanation: "圖表專欄將複雜的納潮、蒸發、結晶、刮鹽、堆鹽、入倉等步驟視覺化呈現，有助於國小學童建構清晰的工序概念。",
+          quote: "第三頁圖表專欄[P4]整體編排結構與學習效益之客觀評價。"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "阿公說「這片鹽田已經兩百多年了，是老祖先留給我們的智慧」，下列哪一項分析最能體現這種「智慧」的深刻內涵？",
+          options: [
+            "老祖先建造了許多冒黑煙的燃油工廠來快速製造食鹽",
+            "老祖先知道如何在鹽田周圍安裝冷氣機供工人消暑",
+            "老祖先靠著賣很貴的鹽巴賺大錢成為古代首富",
+            "老祖先懂得因地制宜，善用潮汐規律、日光熱能、海風及瓦片吸熱物理特性，不耗能源產出民生必需品"
+          ],
+          correct: 4,
+          explanation: "兩百年鹽田智慧在於「取法自然而不破壞自然」，用最樸實的物理天地規律解決人類飲食必不可少的食鹽需求。",
+          quote: "段落[P3]「這製作流程好聰明呵！……是老祖先留給我們的智慧」與全文製鹽步驟融會。"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "小峻在親眼看到瓦片上閃爍的小晶體後驚呼「哇！真的吔！」，作者安排這段情節的主要寫作效果是什麼？",
+          options: [
+            "凸顯小峻原本是個調皮搗蛋、不相信長輩說話的小孩",
+            "藉由兒童發自內心的驚喜感，引領讀者一同體會抽象科學原理轉化為眼前現實成果的感動",
+            "說明小峻想要把瓦片上的鹽巴全部打包帶去學校賣給同學",
+            "為了向讀者抱怨阿公講話太囉唆"
+          ],
+          correct: 2,
+          explanation: "透過小峻從疑惑發問到親眼驗證的興奮感，能讓同為四年級的學生讀者產生強烈的代入感與求知共鳴。",
+          quote: "段落[P1]與[P2]小峻的情感轉折：「阿公，這些鹽是怎麼做出來的？……小峻蹲下來仔細看，果然看見……哇！真的吔！」"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "讀完本文後，若要對「井仔腳瓦盤鹽田」在現代臺灣社會的保存價值進行客觀評價，下列何者最適切？",
+          options: [
+            "現代都是精鹽工廠，老鹽田已經沒有任何生產效率，應全部拆除蓋工廠",
+            "鹽田只是普通積水泥巴池，不值得列入文化資產",
+            "它是臺灣碩果僅存的兩百年日晒鹽文化活資產，兼具環境教育、歷史傳承與觀光美學的珍貴價值",
+            "鹽田只能在暑假白天開放，其他時間都應該封閉禁止任何人參觀"
+          ],
+          correct: 3,
+          explanation: "課文小知識明確肯定井仔腳鹽田是「臺南珍貴的文化資產」，它不僅是歷史活化石，也是環境教育與文化觀光的代表地標。",
+          quote: "段落[P5]：「井仔腳瓦盤鹽田已有超過200年的歷史，是臺南珍貴的文化資產呵！」"
+        },
+
+        // 第四層：應用創造 (4題)
+        {
+          id: 13,
+          level: 4,
+          question: "如果學校要舉辦「走讀臺灣鄉土」活動，請你為井仔腳瓦盤鹽田設計一句最吸引同學參加的推廣標語，哪一句最棒？",
+          options: [
+            "白白的鹽田很刺眼，請大家記得戴墨鏡！",
+            "鹽巴吃太多會口渴，請同學自備開水！",
+            "兩百年陽光與海風的結晶！快來井仔腳體驗踩鹽耙、堆鹽山的鹽田魔法！",
+            "鹽田周圍風很大，小心雨傘被吹走！"
+          ],
+          correct: 3,
+          explanation: "第三句文案巧妙揉合歷史（兩百年）、自然要素（陽光與海風）、動手體驗（踩鹽耙、堆鹽山）與童趣魔法，極具吸引力與號召力。",
+          quote: "綜合課文[P1]晨光美景、[P3]鹽耙堆鹽山與[P5]兩百年文化資產要素之文案創作。"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "若你在自然科學課想在教室陽台進行「自製日晒海鹽」微型實驗，依據課文原理，哪一種設計最能體現瓦盤的智慧？",
+          options: [
+            "把鹽水裝進保溫瓶裡蓋緊蓋子放進冰箱冷藏",
+            "選用平坦且吸熱效果好的深色盤子倒入薄層鹽水，放置在通風且陽光直射的陽台曝晒",
+            "把鹽水倒進馬桶裡等待它自己結出鹽巴",
+            "把厚厚一大深鍋的鹽水放在陰暗潮濕的地下室"
+          ],
+          correct: 2,
+          explanation: "仿照「淺池面積大」、「碎瓦片吸熱」與「陽光照射＋海風通風」三大物理條件，水分蒸發最快、最容易觀察到鹽晶結晶。",
+          quote: "應用段落[P2]大池蒸發與[P5]瓦盤吸熱幫助水分蒸發之科學原理。"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "如果你想為井仔腳瓦盤鹽田設計一款富有文化傳承意義的「文創體驗商品」，下列哪一個提案最巧妙？",
+          options: [
+            "大塑膠袋裝的一般炒菜粗鹽",
+            "一塊未加工的紅色碎瓦片",
+            "普通白色塑膠水桶",
+            "瓦盤馬賽克彩繪風的「七彩祈福日晒海鹽DIY罐」，附贈迷你竹製長柄小鹽耙"
+          ],
+          correct: 4,
+          explanation: "第四項提案融合了井仔腳經典瓦盤碎拼美感、日晒海鹽本質以及鹽耙象徵性工具，兼具手作樂趣與文化典藏價值。",
+          quote: "結合段落[P1]碎瓦盤拼貼美感、[P3]長柄鹽耙與[P5]文化資產特性之文創設計。"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "文章提到海水要經過大蒸發池、小蒸發池、滷缸慢慢蒸發，最後才在瓦盤結晶，這種「循序漸進」的歷程帶給我們學習什麼深刻啟發？",
+          options: [
+            "實力的累積就像海水濃縮成鹽結晶，需要每天踏實練習、循序漸進，才能迎來發光的成果",
+            "寫作業只要一次跳到最後一頁寫完就好，中間都可以隨便空白",
+            "只要每天去操場曬太陽曬得很黑，成績自然就會變成第一名",
+            "遇到比較難的數學題目，直接放棄就不用像海水那樣辛苦蒸發了"
+          ],
+          correct: 1,
+          explanation: "海水不是瞬間變鹹的，而是經由大池、小池逐漸濃縮；學習也是如此，按部就班、耐得住淬鍊，才能凝聚出發光耀眼的實力。",
+          quote: "段落[P2]與[P4]：「走過一格一格的池子……水分蒸發後，海水會變得越來越鹹、越來越濃，最後流進這裡……太陽繼續晒，鹽就會一點一點結晶在瓦片上。」"
+        }
+      ]
+    };
+  </script>
+
+  <!-- 本篇專屬小遊戲互動邏輯 (擴充) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const step1Btn = document.getElementById('gameStep1Btn');
+      const step2Btn = document.getElementById('gameStep2Btn');
+      const step3Btn = document.getElementById('gameStep3Btn');
+      const msgBox = document.getElementById('gameMessage');
+      const crystals = document.getElementById('saltCrystals');
+      const mountain = document.getElementById('saltMountain');
+      const sun = document.getElementById('saltSun');
+      const pond = document.getElementById('saltPond');
+
+      if (step1Btn && step2Btn && step3Btn) {
+        step1Btn.addEventListener('click', function() {
+          if (window.SoundEffects) SoundEffects.play('click');
+          if (crystals) crystals.style.display = 'none';
+          if (mountain) mountain.style.display = 'none';
+          if (pond) pond.style.background = '#0284C7';
+          if (msgBox) msgBox.innerHTML = '🌊 <strong>步驟 1 完成：</strong>水閘開啟，潮水湧入！引進了純淨清涼的大海海水，在大蒸發池中慢慢展開濃縮！';
+        });
+
+        step2Btn.addEventListener('click', function() {
+          if (window.SoundEffects) SoundEffects.play('click');
+          if (sun) sun.style.transform = 'scale(1.3) rotate(20deg)';
+          setTimeout(() => { if (sun) sun.style.transform = 'scale(1) rotate(0deg)'; }, 400);
+          if (crystals) crystals.style.display = 'block';
+          if (mountain) mountain.style.display = 'none';
+          if (pond) pond.style.background = '#7DD3FC';
+          if (msgBox) msgBox.innerHTML = '☀️ <strong>步驟 2 完成：</strong>陽光普照！海風吹拂！碎瓦片迅速吸熱加速水分蒸發，純白的鹽結晶在瓦片上一顆顆閃閃發光囉！✨';
+        });
+
+        step3Btn.addEventListener('click', function() {
+          if (window.SoundEffects) {
+            SoundEffects.play('correct');
+            setTimeout(() => SoundEffects.play('fanfare'), 300);
+          }
+          if (crystals) crystals.style.display = 'none';
+          if (mountain) mountain.style.display = 'block';
+          if (msgBox) msgBox.innerHTML = '🎉 <strong>步驟 3 完成：</strong>拿起動手鹽耙，把潔白粗鹽堆成一座座美麗的小雪山，瀝乾水分後挑進鹽倉！你已經是合格的「小小日晒鹽達人」囉！🏆';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

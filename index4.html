@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>噓！角鴞聽見了海的約定 - 國小四年級深層閱讀互動網站</title>
+  <!-- 共用樣式：復古奶油／馬卡龍粉彩系 3D Q 版兒童遊戲風格 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.htm" class="logo-group">
+        <div class="logo-badge">🏰</div>
+        <div class="logo-text">
+          <h1>神奇閱讀島</h1>
+          <span>國小四年級 AI 互動閱讀教室</span>
+        </div>
+      </a>
+
+      <!-- 學生座號與姓名輸入區 -->
+      <div class="user-badge">
+        <span>🎒 座號：</span>
+        <input type="text" id="studentSeat" class="seat-input" placeholder="號碼" maxlength="3">
+        <span>姓名：</span>
+        <input type="text" id="studentName" class="name-input" placeholder="名字" maxlength="6">
+      </div>
+
+      <!-- 回首頁與功能快捷鍵 -->
+      <div class="nav-actions">
+        <a href="index.htm" class="btn-3d btn-secondary">🏠 返回首頁</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 文章標題與資訊區 -->
+    <section class="article-header">
+      <h2 id="articleTitle">噓！角鴞聽見了海的約定</h2>
+      <div class="article-info-bar">
+        <span class="info-item">📚 <strong id="articleIssue">【得報】第85期「說明」專欄</strong></span>
+        <span class="info-item">✍️ 作者：<span id="articleAuthor">子非魚</span></span>
+        <span class="info-item">📅 日期：<span id="articleDate">2026年9月25日</span></span>
+        <span class="info-item">⭐ 難易度：<span id="articleDifficulty">★★</span></span>
+      </div>
+    </section>
+
+    <!-- 文章閱讀區 (雙模式切換) -->
+    <section class="reading-section">
+      <div class="section-tabs">
+        <button class="tab-btn active" data-tab="tabGallery">
+          🖼️ 原始圖文排版
+        </button>
+        <button class="tab-btn" data-tab="tabText">
+          📖 清晰好讀文字
+        </button>
+      </div>
+
+      <!-- 模式一：原始雜誌圖片排版畫廊 -->
+      <div class="tab-pane" id="tabGallery" style="display: block;">
+        <div class="tab-content gallery-viewer">
+          <div class="gallery-thumbnails" id="galleryThumbs">
+            <button class="thumb-btn active" data-img="article3_page1.png">
+              <img src="article3_page1.png" alt="第1頁 縮圖">
+            </button>
+            <button class="thumb-btn" data-img="article3_page2.png">
+              <img src="article3_page2.png" alt="第2頁 縮圖">
+            </button>
+            <button class="thumb-btn" data-img="article3_page3.png">
+              <img src="article3_page3.png" alt="第3頁 縮圖">
+            </button>
+            <button class="thumb-btn" data-img="article3_page4.png">
+              <img src="article3_page4.png" alt="第4頁 縮圖">
+            </button>
+          </div>
+          <div class="gallery-main">
+            <img id="mainGalleryImg" src="article3_page1.png" alt="文章內容放大預覽">
+          </div>
+        </div>
+      </div>
+
+      <!-- 模式二：清晰好讀文字 (附朗讀與字級) -->
+      <div class="tab-pane" id="tabText" style="display: none;">
+        <div class="tab-content">
+          <div class="reader-controls">
+            <div class="font-size-group">
+              <span>🔤 文字大小：</span>
+              <button class="font-btn active" data-size="normal">正常</button>
+              <button class="font-btn" data-size="large">放大</button>
+              <button class="font-btn" data-size="xlarge">超大</button>
+            </div>
+            <div class="tts-group">
+              <button class="btn-3d btn-lemon" id="ttsPlayBtn">🔊 全文朗讀</button>
+              <button class="btn-3d btn-secondary" id="ttsStopBtn">⏹️ 停止</button>
+            </div>
+          </div>
+
+          <article class="text-reader font-normal" id="textReader">
+            <!-- 文章段落由 ARTICLE_DATA 自動注入 -->
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主題互動小遊戲：蘭嶼之夜：角鴞與海的約定探索之旅 -->
+    <section class="game-section">
+      <div class="game-header">
+        <h3>🎮 <span id="gameTitle">蘭嶼之夜：角鴞與海的約定探索之旅</span></h3>
+        <span class="tag-badge tag-game">四年級探索闖關</span>
+      </div>
+      <div class="game-container">
+        <div class="clock-stage" style="background: radial-gradient(circle, #1E1B4B 0%, #0F172A 70%, #030712 100%); border-radius: var(--radius-md); border: 4px solid #A78BFA; position: relative;">
+          <div style="position: absolute; top: 20px; left: 30px; font-size: 40px;" id="gameMoon">🌙</div>
+          <div style="position: absolute; top: 30px; right: 40px; font-size: 52px; transition: transform 0.4s ease;" id="gameOwl">🦉</div>
+          <div style="position: absolute; bottom: 35px; left: 50%; transform: translateX(-50%); font-size: 48px;" id="gameSea">🌊 🐟 🌊</div>
+          <div style="position: absolute; bottom: 85px; left: 35px; font-size: 38px; display: none;" id="gameHouse">🏡 🪨</div>
+        </div>
+
+        <div class="game-controls">
+          <button class="btn-3d btn-lemon" id="gameOwlBtn">🦉 呼喚島嶼守護者（角鴞）</button>
+          <button class="btn-3d btn-coral" id="gameHouseBtn">🏡 探訪半穴居與靠背石</button>
+          <button class="btn-3d btn-mint" id="gameFishBtn">🐟 迎接黑潮飛魚季（海的約定）</button>
+        </div>
+
+        <div class="game-message-box" id="gameMessage">
+          點擊上方按鈕，走進達悟族的地下屋、聆聽角鴞守護之聲，感受人與海洋溫柔的約定！
+        </div>
+      </div>
+    </section>
+
+    <!-- 深層閱讀四層次測驗區 (16 題) -->
+    <section class="quiz-section">
+      <div class="quiz-header">
+        <h3>🎯 深層閱讀四層次闖關測驗</h3>
+        <span class="tag-badge tag-reading">全方位 16 題選擇題</span>
+      </div>
+
+      <!-- 四層次快速切換鈕 -->
+      <div class="level-nav">
+        <button class="level-pill active" data-level="all">🌟 全部題目 (16)</button>
+        <button class="level-pill" data-level="1">🔍 第一層：字面理解 (4)</button>
+        <button class="level-pill" data-level="2">💡 第二層：推論理解 (4)</button>
+        <button class="level-pill" data-level="3">⚖️ 第三層：批判評價 (4)</button>
+        <button class="level-pill" data-level="4">🚀 第四層：應用創造 (4)</button>
+      </div>
+
+      <!-- 題目渲染清單 -->
+      <div id="quizList">
+        <!-- 題目由 script.js 渲染 -->
+      </div>
+    </section>
+
+    <!-- 開放式思考題 (深度探究) 與 50 字防呆 -->
+    <section class="open-ended-section">
+      <div class="open-header">
+        <span style="font-size: 28px;">💭</span>
+        <h3>開放式思考題（深度探究）</h3>
+      </div>
+
+      <div class="open-prompt-box" id="openEndedPrompt">
+        思考題提示內容載入中...
+      </div>
+
+      <textarea id="openEndedInput" class="open-textarea" placeholder="請在此寫下你的精彩想法，分享你的生活經驗與豐富創意...（請至少寫滿 50 個字，完成後才能點擊送出喔！）"></textarea>
+
+      <!-- 50 字即時狀態與防呆提醒條 -->
+      <div class="char-counter-bar">
+        <div id="openEndedStatus" class="char-status under">
+          ✏️ 目前寫了 <strong>0</strong> 個字，再多寫 <strong>50</strong> 個字就能分享你的思考囉！加油，你可以的！✨
+        </div>
+        <button id="openEndedSubmitBtn" class="btn-3d btn-mint btn-disabled" disabled>
+          🚀 送出我的思考
+        </button>
+      </div>
+
+      <!-- 智慧評分結果卡片 -->
+      <div class="grading-result-card" id="openEndedResultCard">
+        <!-- 評分結果將在此動態顯示 -->
+      </div>
+    </section>
+
+    <!-- 學習成果統計與成績單匯出 -->
+    <section class="report-section">
+      <div class="section-title">
+        <h3>📊 學習成果與證書</h3>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">選擇題答對率</div>
+          <div class="stat-value" id="statCorrectCount">0 / 16</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">測驗總得分</div>
+          <div class="stat-value" id="statTotalScore">0 分</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">作答進度</div>
+          <div class="stat-value" id="statAnsweredProgress">0 / 16</div>
+        </div>
+      </div>
+
+      <!-- 榮譽證書與成績單預覽 (適合截圖與列印) -->
+      <div class="certificate-preview" id="certificateArea">
+        <div class="cert-header">
+          <h4>🏆 國小深層閱讀小達人 · 學習證書 🏆</h4>
+          <p>恭喜完成本篇深度閱讀挑戰，展現優秀的思考與探索力！</p>
+        </div>
+
+        <div class="cert-student-info">
+          <span>🎒 座號：<strong class="display-seat">--</strong></span>
+          <span>👦 姓名：<strong class="display-name">同學</strong></span>
+        </div>
+
+        <div class="cert-content">
+          <p>📝 <strong>四層次閱讀測驗成果：</strong><span id="certQuizScore">尚未完成</span></p>
+          <p>💡 <strong>開放式思考題評定：</strong><span id="certOpenScore">尚未評定</span></p>
+          <div style="margin: 12px 0; background: #FFF9ED; padding: 12px; border-radius: 8px; border-left: 4px solid #F59E0B;">
+            <strong>💬 學生思考作答：</strong>
+            <p id="certOpenText" style="margin-top: 6px; font-style: italic;">（送出思考題後將在此顯示）</p>
+          </div>
+          <p>👨‍🏫 <strong>老師智慧回饋評語：</strong><span id="certTeacherFeedback">完成思考題後自動生成</span></p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap;">
+        <button class="btn-3d btn-primary" id="exportCsvBtn">📥 匯出學習成績 (CSV)</button>
+        <button class="btn-3d btn-secondary" id="printCertBtn">🖨️ 列印 / 存為PDF學習證明</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>🌟 國小四年級深層閱讀互動教材產生系統 · 讓每個孩子愛上思考與閱讀 🌟</p>
+  </footer>
+
+  <!-- 共用互動腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 本篇文章專屬資料設定 -->
+  <script>
+    window.ARTICLE_DATA = {
+      id: 3,
+      title: "噓！角鴞聽見了海的約定",
+      issue: "【得報】第85期「說明」專欄",
+      author: "子非魚",
+      date: "2026年9月25日",
+      difficulty: "★★",
+      gameTitle: "蘭嶼之夜：角鴞與海的約定探索之旅",
+      gradingKeywords: [
+        '蘭嶼', '角鴞', '大海', '海風', '飛魚', '地下屋', '半穴居', '靠背石', '約定', '感恩', '分享', '浪費', '貪心', '守護', '自然', '生態', '海洋', '生活', '珍惜', '環保', '塑膠', '食物', '學校', '同學', '爺爺', '小馬'
+      ],
+      paragraphs: [
+        {
+          tag: "段落 [P1]",
+          title: "回到夢境般熟悉的藍色島嶼",
+          content: "寒假到了，小馬跟媽媽搭船回蘭嶼。平常他住在高雄，這次特地回來陪爺爺。當海風吹過臉頰，他聞到熟悉的鹹味，心裡有點激動——這座島，離開太久了，熟悉的又像一場夢。他用力吸了一口氣，好像要把海的味道都藏進心裡。早晨，蘭嶼的海亮得像一條藍色的緞帶。遠遠的樹梢上，傳來「咕——咕——」的鳴聲。「爺爺，那是甚麼鳥？」"
+        },
+        {
+          tag: "段落 [P2]",
+          title: "島的守護者與半穴居的智慧",
+          content: "「那是蘭嶼角鴞，牠是我們島的守護者。夜裡有牠的聲音，大家就安心了。」爺爺帶著小馬走過一排貼著地面蓋的石屋。「爺爺，為什麼房子要蓋在地下？」「這叫半穴居，」爺爺說，「我們這裡風大又潮溼，住在地下能防風、防熱、防潮。地底的涼氣，讓屋裡一年都舒服得像春天。牆邊有排水溝，下雨時雨水會順著流進大海。」爺爺走出屋外，指著前方的大石頭說：「這是靠背石。」爺爺拍拍石面笑說：「族人常在這裡聊天、望海，有靠背石，就有家的依靠。」爺爺指著遠方說：「那是干欄式建築，白天可以在那裡工作、休息；晚上回家回到半穴居睡覺。以前颱風多，這樣住起來比較安全。」"
+        },
+        {
+          tag: "段落 [P3]",
+          title: "黑潮送來的禮物：飛魚季與部落分工",
+          content: "幾天後，黑潮洋流帶著飛魚回來。那是蘭嶼最重要的季節——飛魚季。飛魚季從農曆正月開始，到八月終食祭結束。那段時間，族人每天都在和海一起呼吸。村裡敲起木鼓，飛魚祭展開。男人修舟、婦女理魚、小孩洗竹竿。"
+        },
+        {
+          tag: "段落 [P4]",
+          title: "分配、感恩與不貪心的約定",
+          content: "爺爺指著竹竿上的飛魚說：「這是男人魚，給出海的壯年吃；這條瘦長的是女人魚，給媽媽和小孩；那條年紀大的是老人魚，要給長輩。海給我們魚，我們就要懂得分配與感恩。」「祭典期間不能捕其他魚，要讓海休息。我們只捕一年的份量，不貪心，也不浪費。」"
+        },
+        {
+          tag: "段落 [P5]",
+          title: "屬於島嶼的永恆約定",
+          content: "夜裡，爺爺和小馬又坐在靠背石上。遠方傳來角鴞的鳴聲，浪聲「啪、啪、啪」，像在對他們說話。小馬望著爺爺的背影，忽然明白——這片海、這座島，一直都在等著他回來。他沒有說話，只是輕輕舉起手，對著海——那是屬於島嶼的約定。夜裡，角鴞又叫了幾聲，像是在見證他們的約定。海風輕輕吹過，小馬覺得，那聲音就像海在呼吸。"
+        }
+      ],
+      openEndedPrompt: "💡 深度探究題目：達悟族爺爺說：『海給我們魚，我們就要懂得分配與感恩……只捕一年的份量，不貪心，也不浪費。』在夜裡，小馬舉起手對著大海許下了屬於島嶼的約定。如果你有機會站在蘭嶼的靠背石旁，你會想對大海、角鴞或這片美麗的土地許下什麼樣的約定？在日常生活中，你又可以如何落實『不貪心、不浪費、感恩分享』的精神呢？請寫下你的溫暖思考吧！（請至少寫滿 50 個字，輸入框會自動過濾空格喔！）",
+      questions: [
+        // 第一層：字面理解 (4題)
+        {
+          id: 1,
+          level: 1,
+          question: "小馬平常住在臺灣哪一個城市？他在寒假時特地搭船回到蘭嶼做什麼？",
+          options: [
+            "平常住在花蓮，回蘭嶼參加釣魚比賽",
+            "平常住在高雄，這次特地回蘭嶼陪伴爺爺",
+            "平常住在臺北，回蘭嶼進行鳥類調查研究",
+            "平常住在臺中，回蘭嶼蒐集美麗的貝殼"
+          ],
+          correct: 2,
+          explanation: "文中第一段明確說明，小馬平常住在高雄，這次在寒假特地搭船回蘭嶼陪爺爺。",
+          quote: "段落[P1]：「寒假到了，小馬跟媽媽搭船回蘭嶼。平常他住在高雄，這次特地回來陪爺爺。」"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "爺爺口中「島的守護者」、在夜裡發出「咕——咕——」鳴聲讓人感到安心的動物是什麼？",
+          options: [
+            "黑面琵鷺",
+            "綠蠵龜",
+            "蘭嶼角鴞",
+            "臺灣藍鵲"
+          ],
+          correct: 3,
+          explanation: "文中爺爺向小馬解釋樹梢上傳來的鳴聲是「蘭嶼角鴞，牠是我們島的守護者。夜裡有牠的聲音，大家就安心了。」",
+          quote: "段落[P2]：「那是蘭嶼角鴞，牠是我們島的守護者。夜裡有牠的聲音，大家就安心了。」"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "蘭嶼最重要的「飛魚季」通常是從農曆幾月開始，一直進行到八月的哪一個祭典結束？",
+          options: [
+            "從農曆正月開始，到八月「終食祭」結束",
+            "從農曆五月端午開始，到中秋節結束",
+            "從農曆七月開始，到除夕夜祭典結束",
+            "一年四季每天都是飛魚季，沒有結束的時候"
+          ],
+          correct: 1,
+          explanation: "課文第三段清楚記載：「飛魚季從農曆正月開始，到八月終食祭結束。」",
+          quote: "段落[P3]：「飛魚季從農曆正月開始，到八月終食祭結束。那段時間，族人每天都在和海一起呼吸。」"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "根據爺爺介紹的族人分魚規矩，竹竿上外型比較「瘦長」的飛魚（女人魚）是分配給誰享用的？",
+          options: [
+            "出海捕魚的壯年男人",
+            "全村力氣最大的勇士",
+            "村落裡年紀最長的老人長輩",
+            "辛苦的媽媽和小孩"
+          ],
+          correct: 4,
+          explanation: "爺爺指著竹竿上的飛魚解釋，瘦長的是女人魚，分配給媽媽和小朋友食用。",
+          quote: "段落[P4]：「這條瘦長的是女人魚，給媽媽和小孩；那條年紀大的是老人魚，要給長輩。」"
+        },
+
+        // 第二層：推論理解 (4題)
+        {
+          id: 5,
+          level: 2,
+          question: "為什麼蘭嶼的傳統達悟族石屋要建在地面下的「半穴居」？主要能達到哪些生活保護功能？",
+          options: [
+            "為了避開海邊的蚊蟲叮咬",
+            "因為蘭嶼風大且潮溼，半穴居能防風、防熱、防潮，地底涼氣還能讓屋內四季舒適如春",
+            "為了防止海盜發現村莊，把房子藏在地洞裡",
+            "地下埋藏許多豐富煤礦，方便隨時挖取取暖"
+          ],
+          correct: 2,
+          explanation: "爺爺詳盡解說「我們這裡風大又潮溼，住在地下能防風、防熱、防潮。地底的涼氣，讓屋裡一年都舒服得像春天」，能有效抵禦強烈颱風侵害。",
+          quote: "段落[P2]：「這叫半穴居……我們這裡風大又潮溼，住在地下能防風、防熱、防潮……以前颱風多，這樣住起來比較安全。」"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "屋外立著一塊大石頭，爺爺拍著它笑說：「有靠背石，就有家的依靠」，這句話最能推論出什麼情感涵義？",
+          options: [
+            "靠背石很硬，是專門用來練習拳擊功夫的道具",
+            "這塊石頭是為了防止房屋被大風吹走而特地壓住地基的重物",
+            "靠背石是劃分鄰居家產與土地所有權的嚴格界線",
+            "靠背石是族人聚會聊天、靜心望海的場所，象徵著對家族、故鄉與土地溫暖的心靈依歸"
+          ],
+          correct: 4,
+          explanation: "靠背石不只是一塊石頭，更乘載了族人日常生活交談、眺望海洋的溫馨回憶，是故鄉歸屬感的具象化象徵。",
+          quote: "段落[P2]：「族人常在這裡聊天、望海，有靠背石，就有家的依靠。」"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "祭典期間族人規定「不能捕其他魚，要讓海休息」，並且「只捕一年的份量，不貪心，也不浪費」，這展現了什麼深刻智慧？",
+          options: [
+            "族人因為討厭吃別種魚，所以只抓飛魚",
+            "因為鹽巴不夠醃製太多的魚，所以不敢多抓",
+            "敬畏大海並順應自然法則，給予海洋生態休養生息的時間，落實資源永續循環的智慧",
+            "其他魚類都具有強烈劇毒，只有飛魚可以安全食用"
+          ],
+          correct: 3,
+          explanation: "「讓海休息、只捕一年份、不貪心」，正是原住民順應天時、取之有度、與大自然永續共存的卓越生態哲學。",
+          quote: "段落[P4]：「祭典期間不能捕其他魚，要讓海休息。我們只捕一年的份量，不貪心，也不浪費。」"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "飛魚祭展開時，村子裡「男人修舟、婦女理魚、小孩洗竹竿」，這段生動的描寫推論呈現出部落文化的什麼特質？",
+          options: [
+            "部落分工有序且全員參與，男女老幼各司其職、和諧互助，共同守護傳承核心文化",
+            "大人喜歡把最辛苦的清洗工作全部丟給小朋友做",
+            "村子裡缺乏工具，所以每個人只能輪流做一件事情",
+            "大家彼此防備，因此規定不能互相幫忙"
+          ],
+          correct: 1,
+          explanation: "全村動員各自扮演重要角色，男人修船出海、婦女整理漁獲、孩童清洗竹竿晾曬，體現了部落團結互助的凝聚力。",
+          quote: "段落[P3]：「村裡敲起木鼓，飛魚祭展開。男人修舟、婦女理魚、小孩洗竹竿。」"
+        },
+
+        // 第三層：批判評價 (4題)
+        {
+          id: 9,
+          level: 3,
+          question: "文章第一段描寫小馬剛踏上蘭嶼時「用力吸了一口氣，好像要把海的味道都藏進心裡」，作者運用這段感官摹寫的主要效果是什麼？",
+          options: [
+            "批評蘭嶼海邊的魚腥味太重讓小馬難受",
+            "透過嗅覺記憶精準勾勒出久居都市的小馬，對故鄉島嶼無比深切的思念與心靈觸動",
+            "描寫小馬因為暈船而感到呼吸困難",
+            "說明高雄的空氣品質比蘭嶼更好"
+          ],
+          correct: 2,
+          explanation: "海風的鹹味是遊子對故鄉的深刻記憶印記，「把味道藏進心裡」生動傳達出離家許久的孩子回到母親島嶼的情感共鳴。",
+          quote: "段落[P1]：「聞到熟悉的鹹味，心裡有點激動……用力吸了一口氣，好像要把海的味道都藏進心裡。」"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "達悟族在處理飛魚時嚴格將魚分為「男人魚、女人魚、老人魚」，下列哪一項最能客觀評價這種傳統文化背後的價值核心？",
+          options: [
+            "這種分配制度太繁瑣落伍，應該隨便煮熟大家一起搶著吃",
+            "這是為了炫耀哪一種魚的肉質最好吃",
+            "這說明達悟族只有男人和長輩才能享有最好的生活待遇",
+            "它彰顯了「海給我們魚，我們就要懂得分配與感恩」的精神，兼顧家庭長幼照顧與對生命資源的敬意"
+          ],
+          correct: 4,
+          explanation: "分魚並非歧視，而是將營養需求、捕魚辛勞與孝順敬老落實於飲食分配中，核心在於懂得分工、體貼與感恩。",
+          quote: "段落[P4]：「海給我們魚，我們就要懂得分配與感恩。」"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "文章標題定為《噓！角鴞聽見了海的約定》，從象徵寓意來看，文中的「海的約定」最能代表哪一種深層意義？",
+          options: [
+            "小馬和角鴞約定好要在樹上比賽捉迷藏",
+            "人類發誓一定要想辦法把黑潮所有的飛魚一網打盡",
+            "人與海洋、故鄉土地間彼此尊重、不過度索求，世代守護這片島嶼生態的溫柔盟約",
+            "爺爺和小馬約定以後永遠不再搭船出海"
+          ],
+          correct: 3,
+          explanation: "「海的約定」既是達悟族永續捕魚、守護海洋的生態承諾，也是在都市長大的小馬與故鄉土地重新締結的情感誓約。",
+          quote: "段落[P5]與全文主旨：「他沒有說話，只是輕輕舉起手，對著海——那是屬於島嶼的約定。夜裡，角鴞又叫了幾聲，像是在見證他們的約定。」"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "綜合全文，若要對蘭嶼的「地下屋（半穴居）」在建築美學與環境適應上作一個最貼切客觀的評價，何者最合適？",
+          options: [
+            "它凝聚了達悟族適應強烈海風、高溫與潮溼環境的卓越生態智慧，是傳統自然綠建築的瑰寶",
+            "半穴居建在地下太矮小，是一種完全沒有價值的原始洞穴",
+            "這種房屋完全依靠鋼筋水泥建造，沒有任何傳統文化可言",
+            "因為當地買不到磚頭，所以只好勉強住在地下避難"
+          ],
+          correct: 1,
+          explanation: "半穴居利用地層天然恆溫隔熱防風，並設有排向大海的排水溝，是人類依循自然環境所發展出的高超建築智慧結晶。",
+          quote: "段落[P2]：「住在地下能防風、防熱、防潮。地底的涼氣，讓屋裡一年都舒服得像春天。牆邊有排水溝，下雨時雨水會順著流進大海。」"
+        },
+
+        // 第四層：應用創造 (4題)
+        {
+          id: 13,
+          level: 4,
+          question: "若小馬想在高雄就讀的學校圖書館舉辦「蘭嶼文化與角鴞守護」微型特展，他想設計一句最具吸引力的主題宣傳標語，哪一句最棒？",
+          options: [
+            "蘭嶼風浪很大，大家千萬不要搭船去！",
+            "吃魚只挑大條的，這樣才划算！",
+            "聽海在呼吸！跟著角鴞走進蘭嶼地下屋，一起做海的守護者！",
+            "請大家隨手亂丟垃圾，海洋會自己清理！"
+          ],
+          correct: 3,
+          explanation: "第三句文案融合了「海在呼吸」、「角鴞守護者」、「地下屋」與「海洋保護」等核心意象，充滿溫暖詩意與號召力。",
+          quote: "綜合段落[P1]角鴞、[P2]地下屋與[P5]「海在呼吸」之核心意象創作。"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "如果四年級的你想在校園與日常生活中實踐達悟族「只捕一年的份量，不貪心，也不浪費」的精神，下列哪一種行為最值得讚許？",
+          options: [
+            "享用營養午餐時，吃得下多少就盛多少，愛惜每一份飯菜不浪費，懂得感恩農夫與土地",
+            "只要看到福利社有好吃的零食，就把零用錢全部花光把架上餅乾搶光",
+            "看到喜歡的新文具就吵著買很多套，用不完就直接扔掉",
+            "吃不完的便當隨意塞進書桌抽屜假裝吃完了"
+          ],
+          correct: 1,
+          explanation: "達悟族取用適量、不貪心、感恩分享的美德，轉化到國小學童的生活實踐正是「珍惜食物、按需取用、不浪費資源」。",
+          quote: "應用段落[P4]「只捕一年的份量，不貪心，也不浪費」之生態美德延伸至生活實踐。"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "若你想為蘭嶼的海洋文化設計一款富含教育意義的「文化體驗桌遊」，下列哪一個遊戲機制最能傳達課文的生態與倫理價值？",
+          options: [
+            "玩家比誰能用大網把海裡所有的飛魚一網打盡誰就獲勝",
+            "玩家必須同心協力修舟、遵循祭典休魚期讓海休息，並按照角色公平分配魚獲才能共同守護島嶼過關",
+            "誰的船撞沉其他人的船就能搶奪所有的金幣",
+            "玩家可以用炸藥炸平地下屋來興建超大遊樂園"
+          ],
+          correct: 2,
+          explanation: "第二項機制緊扣課文所闡述的「合作分工、休漁永續、長幼分配與感恩倫理」，使玩遊戲的過程轉化為深刻的文化體會。",
+          quote: "結合段落[P3]合作分工、[P4]休漁期與分魚倫理之遊戲機制創造。"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "文章結尾寫道「小馬沒有說話，只是輕輕舉起手，對著海——那是屬於島嶼的約定」，如果你站在海邊，你會想對大自然許下什麼約定？",
+          options: [
+            "約定每天都要買很多塑膠瓶丟到海裡餵小魚",
+            "約定自己長大要把海邊所有的樹木都砍下來生火",
+            "約定以後再也不去任何有海或有樹木的地方",
+            "約定自己在生活中少用一次性塑膠製品、愛護海洋環境，用行動溫柔守護美麗的地球母親"
+          ],
+          correct: 4,
+          explanation: "第四項約定深刻呼應了對大自然的承諾與守護責任，展現出國小學童具備環境同理心與實際守護行動的高尚情操。",
+          quote: "應用段落[P5]「屬於島嶼的約定」引導孩子深化環境保護自我省思。"
+        }
+      ]
+    };
+  </script>
+
+  <!-- 本篇專屬小遊戲互動邏輯 (擴充) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const owlBtn = document.getElementById('gameOwlBtn');
+      const houseBtn = document.getElementById('gameHouseBtn');
+      const fishBtn = document.getElementById('gameFishBtn');
+      const msgBox = document.getElementById('gameMessage');
+      const owl = document.getElementById('gameOwl');
+      const moon = document.getElementById('gameMoon');
+      const sea = document.getElementById('gameSea');
+      const house = document.getElementById('gameHouse');
+
+      if (owlBtn && houseBtn && fishBtn) {
+        owlBtn.addEventListener('click', function() {
+          if (window.SoundEffects) SoundEffects.play('click');
+          if (owl) {
+            owl.style.transform = 'scale(1.3) rotate(-10deg)';
+            setTimeout(() => { owl.style.transform = 'scale(1) rotate(0deg)'; }, 400);
+          }
+          if (msgBox) msgBox.innerHTML = '🦉 「咕——咕——」遠方樹梢傳來溫柔的鳴聲！蘭嶼角鴞是島嶼的守護者，夜裡有牠的歌聲，全村人都安心了。';
+        });
+
+        houseBtn.addEventListener('click', function() {
+          if (window.SoundEffects) SoundEffects.play('click');
+          if (house) house.style.display = 'block';
+          if (msgBox) msgBox.innerHTML = '🏡 走進「半穴居地下屋」！防風、防熱、防潮，冬暖夏涼如春天；屋外坐在「靠背石」上，有靠背石，就有家的依靠！';
+        });
+
+        fishBtn.addEventListener('click', function() {
+          if (window.SoundEffects) {
+            SoundEffects.play('correct');
+            setTimeout(() => SoundEffects.play('fanfare'), 300);
+          }
+          if (sea) {
+            sea.innerHTML = '🌊 🐟 🐟 🌊';
+            setTimeout(() => { sea.innerHTML = '🌊 🐟 🌊'; }, 1000);
+          }
+          if (msgBox) msgBox.innerHTML = '🎉 黑潮帶來了飛魚季！男人修舟、婦女理魚、小孩洗竹竿。「只捕一年的份量，不貪心，也不浪費！」我們聽見了海的約定！🏆';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

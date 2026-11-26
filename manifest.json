@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "file": "index2.html",
+    "title": "什麼是天文鐘？",
+    "issue": "【得報】第80期「說明」專欄",
+    "author": "煉氣士",
+    "date": "2026-08-21",
+    "grade": "國小四年級",
+    "difficulty": "★★",
+    "cover": "article1_page1.png",
+    "gameTitle": "布拉格天文鐘：星象與齒輪大冒險",
+    "questionsCount": 16,
+    "description": "你知道600多年前歐洲發明的天文鐘，是如何把整個宇宙星象裝進時鐘裡的嗎？快來探索神奇齒輪、骷髏人與金雞的整點報時秀！"
+  },
+  {
+    "id": 2,
+    "file": "index3.html",
+    "title": "一起去鹽田",
+    "issue": "【得報】第79期「圖表」專欄",
+    "author": "小烏龜",
+    "date": "2026-08-14",
+    "grade": "國小四年級",
+    "difficulty": "★★★",
+    "cover": "article2_page1.png",
+    "gameTitle": "井仔腳鹽田：小小鹽工日晒大冒險",
+    "questionsCount": 16,
+    "description": "走進臺南北門200年歷史的井仔腳瓦盤鹽田！跟著阿公和小峻一起探索陽光、海風、潮汐與碎瓦片如何變出潔白海鹽的古老智慧！"
+  },
+  {
+    "id": 3,
+    "file": "index4.html",
+    "title": "噓！角鴞聽見了海的約定",
+    "issue": "【得報】第85期「說明」專欄",
+    "author": "子非魚",
+    "date": "2026-09-25",
+    "grade": "國小四年級",
+    "difficulty": "★★",
+    "cover": "article3_page1.png",
+    "gameTitle": "蘭嶼之夜：角鴞與海的約定探索之旅",
+    "questionsCount": 16,
+    "description": "跟著小馬搭船回蘭嶼，聆聽角鴞守護者的鳴叫，走進達悟族半穴居地下屋、體驗飛魚季的分工與感恩，許下屬於島嶼的永恆約定！"
+  }
+]

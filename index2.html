@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>什麼是天文鐘？ - 國小四年級深層閱讀互動網站</title>
+  <!-- 共用樣式：復古奶油／馬卡龍粉彩系 3D Q 版兒童遊戲風格 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="index.htm" class="logo-group">
+        <div class="logo-badge">🏰</div>
+        <div class="logo-text">
+          <h1>神奇閱讀島</h1>
+          <span>國小四年級 AI 互動閱讀教室</span>
+        </div>
+      </a>
+
+      <!-- 學生座號與姓名輸入區 -->
+      <div class="user-badge">
+        <span>🎒 座號：</span>
+        <input type="text" id="studentSeat" class="seat-input" placeholder="號碼" maxlength="3">
+        <span>姓名：</span>
+        <input type="text" id="studentName" class="name-input" placeholder="名字" maxlength="6">
+      </div>
+
+      <!-- 回首頁與功能快捷鍵 -->
+      <div class="nav-actions">
+        <a href="index.htm" class="btn-3d btn-secondary">🏠 返回首頁</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 文章標題與資訊區 -->
+    <section class="article-header">
+      <h2 id="articleTitle">什麼是天文鐘？</h2>
+      <div class="article-info-bar">
+        <span class="info-item">📚 <strong id="articleIssue">【得報】第80期「說明」專欄</strong></span>
+        <span class="info-item">✍️ 作者：<span id="articleAuthor">煉氣士</span></span>
+        <span class="info-item">📅 日期：<span id="articleDate">2026年8月21日</span></span>
+        <span class="info-item">⭐ 難易度：<span id="articleDifficulty">★★</span></span>
+      </div>
+    </section>
+
+    <!-- 文章閱讀區 (雙模式切換) -->
+    <section class="reading-section">
+      <div class="section-tabs">
+        <button class="tab-btn active" data-tab="tabGallery">
+          🖼️ 原始圖文排版
+        </button>
+        <button class="tab-btn" data-tab="tabText">
+          📖 清晰好讀文字
+        </button>
+      </div>
+
+      <!-- 模式一：原始雜誌圖片排版畫廊 -->
+      <div class="tab-pane" id="tabGallery" style="display: block;">
+        <div class="tab-content gallery-viewer">
+          <div class="gallery-thumbnails" id="galleryThumbs">
+            <button class="thumb-btn active" data-img="article1_page1.png">
+              <img src="article1_page1.png" alt="第1頁 縮圖">
+            </button>
+            <button class="thumb-btn" data-img="article1_page2.png">
+              <img src="article1_page2.png" alt="第2頁 縮圖">
+            </button>
+            <button class="thumb-btn" data-img="article1_page3.png">
+              <img src="article1_page3.png" alt="第3頁 縮圖">
+            </button>
+          </div>
+          <div class="gallery-main">
+            <img id="mainGalleryImg" src="article1_page1.png" alt="文章內容放大預覽">
+          </div>
+        </div>
+      </div>
+
+      <!-- 模式二：清晰好讀文字 (附朗讀與字級) -->
+      <div class="tab-pane" id="tabText" style="display: none;">
+        <div class="tab-content">
+          <div class="reader-controls">
+            <div class="font-size-group">
+              <span>🔤 文字大小：</span>
+              <button class="font-btn active" data-size="normal">正常</button>
+              <button class="font-btn" data-size="large">放大</button>
+              <button class="font-btn" data-size="xlarge">超大</button>
+            </div>
+            <div class="tts-group">
+              <button class="btn-3d btn-lemon" id="ttsPlayBtn">🔊 全文朗讀</button>
+              <button class="btn-3d btn-secondary" id="ttsStopBtn">⏹️ 停止</button>
+            </div>
+          </div>
+
+          <article class="text-reader font-normal" id="textReader">
+            <!-- 文章段落由 ARTICLE_DATA 自動注入 -->
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主題互動小遊戲：布拉格天文鐘齒輪與星象大冒險 -->
+    <section class="game-section">
+      <div class="game-header">
+        <h3>🎮 <span id="gameTitle">布拉格天文鐘：星象與齒輪大冒險</span></h3>
+        <span class="tag-badge tag-game">四年級探索闖關</span>
+      </div>
+      <div class="game-container">
+        <div class="clock-stage">
+          <span class="gear-item gear-left">⚙️</span>
+          <span class="gear-item gear-right">⚙️</span>
+          
+          <div class="clock-dial" id="gameClockDial">
+            <span class="dial-star" style="top: 15px; left: 120px;">☀️</span>
+            <span class="dial-star" style="bottom: 15px; left: 120px;">🌙</span>
+            <span class="dial-star" style="left: 15px; top: 120px;">♈</span>
+            <span class="dial-star" style="right: 15px; top: 120px;">♎</span>
+            <div class="clock-hand" id="gameClockHand"></div>
+            <div class="clock-center-pin"></div>
+          </div>
+        </div>
+
+        <div class="game-controls">
+          <button class="btn-3d btn-lemon" id="gameSpinBtn">🔄 轉動天文星象齒輪</button>
+          <button class="btn-3d btn-coral" id="gameRoosterBtn">🔔 觸發整點報時秀！</button>
+        </div>
+
+        <div class="game-message-box" id="gameMessage">
+          點擊上方按鈕，體驗天文鐘齒輪嚙合與整點金雞報時秀的精巧設計！
+        </div>
+      </div>
+    </section>
+
+    <!-- 深層閱讀四層次測驗區 (16 題) -->
+    <section class="quiz-section">
+      <div class="quiz-header">
+        <h3>🎯 深層閱讀四層次闖關測驗</h3>
+        <span class="tag-badge tag-reading">全方位 16 題選擇題</span>
+      </div>
+
+      <!-- 四層次快速切換鈕 -->
+      <div class="level-nav">
+        <button class="level-pill active" data-level="all">🌟 全部題目 (16)</button>
+        <button class="level-pill" data-level="1">🔍 第一層：字面理解 (4)</button>
+        <button class="level-pill" data-level="2">💡 第二層：推論理解 (4)</button>
+        <button class="level-pill" data-level="3">⚖️ 第三層：批判評價 (4)</button>
+        <button class="level-pill" data-level="4">🚀 第四層：應用創造 (4)</button>
+      </div>
+
+      <!-- 題目渲染清單 -->
+      <div id="quizList">
+        <!-- 題目由 script.js 渲染 -->
+      </div>
+    </section>
+
+    <!-- 開放式思考題 (深度探究) 與 50 字防呆 -->
+    <section class="open-ended-section">
+      <div class="open-header">
+        <span style="font-size: 28px;">💭</span>
+        <h3>開放式思考題（深度探究）</h3>
+      </div>
+
+      <div class="open-prompt-box" id="openEndedPrompt">
+        思考題提示內容載入中...
+      </div>
+
+      <textarea id="openEndedInput" class="open-textarea" placeholder="請在此寫下你的精彩想法，分享你的生活經驗與豐富創意...（請至少寫滿 50 個字，完成後才能點擊送出喔！）"></textarea>
+
+      <!-- 50 字即時狀態與防呆提醒條 -->
+      <div class="char-counter-bar">
+        <div id="openEndedStatus" class="char-status under">
+          ✏️ 目前寫了 <strong>0</strong> 個字，再多寫 <strong>50</strong> 個字就能分享你的思考囉！加油，你可以的！✨
+        </div>
+        <button id="openEndedSubmitBtn" class="btn-3d btn-mint btn-disabled" disabled>
+          🚀 送出我的思考
+        </button>
+      </div>
+
+      <!-- 智慧評分結果卡片 -->
+      <div class="grading-result-card" id="openEndedResultCard">
+        <!-- 評分結果將在此動態顯示 -->
+      </div>
+    </section>
+
+    <!-- 學習成果統計與成績單匯出 -->
+    <section class="report-section">
+      <div class="section-title">
+        <h3>📊 學習成果與證書</h3>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">選擇題答對率</div>
+          <div class="stat-value" id="statCorrectCount">0 / 16</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">測驗總得分</div>
+          <div class="stat-value" id="statTotalScore">0 分</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">作答進度</div>
+          <div class="stat-value" id="statAnsweredProgress">0 / 16</div>
+        </div>
+      </div>
+
+      <!-- 榮譽證書與成績單預覽 (適合截圖與列印) -->
+      <div class="certificate-preview" id="certificateArea">
+        <div class="cert-header">
+          <h4>🏆 國小深層閱讀小達人 · 學習證書 🏆</h4>
+          <p>恭喜完成本篇深度閱讀挑戰，展現優秀的思考與探索力！</p>
+        </div>
+
+        <div class="cert-student-info">
+          <span>🎒 座號：<strong class="display-seat">--</strong></span>
+          <span>👦 姓名：<strong class="display-name">同學</strong></span>
+        </div>
+
+        <div class="cert-content">
+          <p>📝 <strong>四層次閱讀測驗成果：</strong><span id="certQuizScore">尚未完成</span></p>
+          <p>💡 <strong>開放式思考題評定：</strong><span id="certOpenScore">尚未評定</span></p>
+          <div style="margin: 12px 0; background: #FFF9ED; padding: 12px; border-radius: 8px; border-left: 4px solid #F59E0B;">
+            <strong>💬 學生思考作答：</strong>
+            <p id="certOpenText" style="margin-top: 6px; font-style: italic;">（送出思考題後將在此顯示）</p>
+          </div>
+          <p>👨‍🏫 <strong>老師智慧回饋評語：</strong><span id="certTeacherFeedback">完成思考題後自動生成</span></p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap;">
+        <button class="btn-3d btn-primary" id="exportCsvBtn">📥 匯出學習成績 (CSV)</button>
+        <button class="btn-3d btn-secondary" id="printCertBtn">🖨️ 列印 / 存為PDF學習證明</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>🌟 國小四年級深層閱讀互動教材產生系統 · 讓每個孩子愛上思考與閱讀 🌟</p>
+  </footer>
+
+  <!-- 共用互動腳本 -->
+  <script src="script.js"></script>
+
+  <!-- 本篇文章專屬資料設定 -->
+  <script>
+    window.ARTICLE_DATA = {
+      id: 1,
+      title: "什麼是天文鐘？",
+      issue: "【得報】第80期「說明」專欄",
+      author: "煉氣士",
+      date: "2026年8月21日",
+      difficulty: "★★",
+      gameTitle: "布拉格天文鐘：星象與齒輪大冒險",
+      paragraphs: [
+        {
+          tag: "段落 [P1]",
+          title: "會跳舞、看星星的科技時鐘",
+          content: "你聽過會跳舞、還會看星星的時鐘嗎？在 600 多年前的歐洲（現今為捷克—布拉格），科學家和工匠們合力發明了一種超級厲害的「科技時鐘」，叫做天文鐘！它不只會告訴你現在幾點，還能把整個宇宙的秘密都裝進時鐘裡呵！"
+        },
+        {
+          tag: "段落 [P2]",
+          title: "宇宙的縮小版：什麼是天文鐘？",
+          content: "我們平常看的時鐘只有時針和分針，但天文鐘很不一樣，它的圓形錶盤密密麻麻的，看起來就像一個神秘的魔法陣。其實，天文鐘就是把天空中的星象縮小，放進時鐘裡。當你站在它面前，只要看一眼，就能立刻知道：現在太陽走到哪一個星座了、今天的月亮是圓的還是彎的，甚至連今年是哪一年、哪一個月份，它都能清清楚楚地告訴你。在沒有智慧型手機的古代，這簡直就像是魔法一樣神奇！"
+        },
+        {
+          tag: "段落 [P3]",
+          title: "咕咕雞與死神：最熱鬧的報時秀",
+          content: "世界上最著名的天文鐘，位於捷克布拉格的廣場上。這座鐘已經「活」了六百多歲了，但它到現在都還非常有活力！每到整點，天文鐘周圍就會擠滿興奮的遊客。因為當鐘聲響起時，鐘旁邊的木雕小人就會開始「動起來」：骷髏人會搖動鈴鐺，象徵時間的寶貴；接著，十二位耶穌的弟子會像走秀一樣，一個接一個從指針上方的小窗戶探出頭來跟大家打招呼。最後，最頂端的一隻金色公雞會高聲啼叫「喔喔喔——」，整點報時秀才完美結束。這比現在的「咕咕鐘」還要好玩幾百倍呢！"
+        },
+        {
+          tag: "段落 [P4]",
+          title: "科學與藝術的完美結合",
+          content: "為什麼古代人要建造這麼複雜的時鐘呢？因為以前的人沒有氣象預報，農夫需要知道太陽和月亮的變化來決定什麼時候種田，航海家也需要看星星來認路。天文鐘的內部充滿了成百上千個大小不同的齒輪，彼此緊緊扣在一起。每一個齒輪轉動的速度都不一樣，有些齒輪要花一整年才會轉完一圈！這需要非常精準的數學和天文知識才能做得出來。"
+        },
+        {
+          tag: "段落 [P5]",
+          title: "不休息的宇宙魔術師",
+          content: "天文鐘就像是一位不休息的宇宙魔術師，用齒輪記錄著星星的軌跡。下次如果有機會看到它，不妨仔細觀察一下，看看你能不能從神奇的錶盤上，找到今天月亮的形狀呵！"
+        }
+      ],
+      openEndedPrompt: "💡 深度探究題目：如果你有機會像古代工匠一樣，為自己的學校或家鄉設計一座『神奇校園時鐘』，你希望這個時鐘在整點報時時出現什麼樣的表演角色或特色功能？它能幫同學或家人解決什麼生活上的小問題呢？請結合課文提到的天文鐘原理（例如：齒輪、星象、報時偶、生活指引）與你的生活經驗，寫下你的精彩想法吧！（請至少寫滿 50 個字，字數計算會自動過濾空格喔！）",
+      questions: [
+        // 第一層：字面理解 (4題)
+        {
+          id: 1,
+          level: 1,
+          question: "天文鐘大約是在多少年前、歐洲的哪一個城市發明的？",
+          options: [
+            "300多年前的英國倫敦",
+            "600多年前的捷克布拉格",
+            "1000多年前的法國巴黎",
+            "2000多年前的希臘雅典"
+          ],
+          correct: 2,
+          explanation: "文中第一段明確指出，天文鐘是在600多年前由歐洲現今捷克布拉格的科學家和工匠合力發明的。",
+          quote: "段落[P1]：「在 600 多年前的歐洲（現今為捷克—布拉格），科學家和工匠們合力發明了一種超級厲害的『科技時鐘』，叫做天文鐘！」"
+        },
+        {
+          id: 2,
+          level: 1,
+          question: "捷克布拉格天文鐘的整點報時秀中，最後是由哪一個角色發出叫聲宣布報時結束？",
+          options: [
+            "指針上方探頭的小窗戶木雕人",
+            "搖動鈴鐺象徵時間寶貴的骷髏人",
+            "手持羽毛筆記錄歷史的學者",
+            "最頂端高聲啼叫「喔喔喔」的金色公雞"
+          ],
+          correct: 4,
+          explanation: "文中第三段描述整點報時秀的最後高潮，是最頂端的金色公雞高聲啼叫「喔喔喔——」，整點報時才結束。",
+          quote: "段落[P3]：「最後，最頂端的一隻金色公雞會高聲啼叫『喔喔喔——』，整點報時秀才完美結束。」"
+        },
+        {
+          id: 3,
+          level: 1,
+          question: "報時秀開始鐘聲響起時，鐘旁邊搖動鈴鐺的木雕骷髏人象徵著什麼意義？",
+          options: [
+            "象徵時間的寶貴",
+            "提醒大家肚子餓該吃午餐了",
+            "代表冬天到了天氣很寒冷",
+            "提醒工匠要幫時鐘上發條"
+          ],
+          correct: 1,
+          explanation: "根據課文內容，骷髏人搖動鈴鐺所代表的寓意是象徵時間的寶貴。",
+          quote: "段落[P3]：「骷髏人會搖動鈴鐺，象徵時間的寶貴。」"
+        },
+        {
+          id: 4,
+          level: 1,
+          question: "在布拉格天文鐘報時時，像走秀一樣一個接一個從小窗戶探出頭來跟大家打招呼的是誰？",
+          options: [
+            "天空中的十二個星座守護神",
+            "捷克歷代受人尊崇的國王",
+            "十二位耶穌的弟子",
+            "當初建造天文鐘的工匠師傅"
+          ],
+          correct: 3,
+          explanation: "文中明確說明，從小窗戶探出頭來跟遊客打招呼的是十二位耶穌的弟子。",
+          quote: "段落[P3]：「接著，十二位耶穌的弟子會像走秀一樣，一個接一個從指針上方的小窗戶探出頭來跟大家打招呼。」"
+        },
+
+        // 第二層：推論理解 (4題)
+        {
+          id: 5,
+          level: 2,
+          question: "文章提到天文鐘內部「有些齒輪要花一整年才會轉完一圈」，這樣精密設計的主要推論原因是什麼？",
+          options: [
+            "齒輪因為做太大太沉重，所以運轉很緩慢",
+            "古代工匠缺乏潤滑油導致齒輪卡住了",
+            "工匠故意把發條調慢讓遊客慢慢欣賞",
+            "為了精確記錄地球繞太陽公轉的四季月份週期與星座位置"
+          ],
+          correct: 4,
+          explanation: "因為天文鐘需要顯示整年月份與太陽星座的運行軌跡，這些天體運行的自然週期是一年，因此必須配置轉動一整年的極慢速精密齒輪。",
+          quote: "段落[P2]與[P4]：「連今年是哪一年、哪一個月份，它都能清清楚楚地告訴你……有些齒輪要花一整年才會轉完一圈！這需要非常精準的數學和天文知識才能做得出來。」"
+        },
+        {
+          id: 6,
+          level: 2,
+          question: "在古代沒有氣象預報與智慧型手機的環境下，天文鐘的發明推論能解決當時人們的哪些生活大事？",
+          options: [
+            "幫助農夫依日月星象決定耕種時機，並指引航海家在大海中辨別航向",
+            "讓廣場上的商店可以隨時透過廣播促銷打折商品",
+            "幫助布拉格城裡的守衛預測敵軍偷襲的確切日期",
+            "用來測量每一位市民跑步的速度以舉辦運動會"
+          ],
+          correct: 1,
+          explanation: "課文清楚推論以前農夫需要了解日月變化以種田，航海家航行需觀星認路，天文鐘整合了這些實用天文規律。",
+          quote: "段落[P4]：「因為以前的人沒有氣象預報，農夫需要知道太陽和月亮的變化來決定什麼時候種田，航海家也需要看星星來認路。」"
+        },
+        {
+          id: 7,
+          level: 2,
+          question: "作者將天文鐘的圓形錶盤比喻為「神秘的魔法陣」，主要是想突顯天文鐘的什麼特質？",
+          options: [
+            "錶盤具有強大的魔法詛咒，不能隨便靠近",
+            "錶盤表面很髒亂，塗滿了奇怪的黑色線條",
+            "錶盤刻度細密複雜，且能將浩瀚星空天象收納於眼前的奇妙智慧",
+            "時鐘是古代魔法師使用法術召喚出來的奇幻產物"
+          ],
+          correct: 3,
+          explanation: "作者以魔法陣比喻密密麻麻的錶盤與顯現星象的功能，生動表達古代人在沒有高科技時，將宇宙縮小呈現於時鐘上的驚奇與巧奪天工。",
+          quote: "段落[P2]：「它的圓形錶盤密密麻麻的，看起來就像一個神秘的魔法陣。其實，天文鐘就是把天空中的星象縮小，放進時鐘裡……在沒有智慧型手機的古代，這簡直就像是魔法一樣神奇！」"
+        },
+        {
+          id: 8,
+          level: 2,
+          question: "課文中提到這座天文鐘「已經活了六百多歲了，但到現在都還非常有活力」，「非常有活力」最合適的推論是？",
+          options: [
+            "天文鐘會在晚上趁遊客睡覺時偷偷在廣場上跳舞",
+            "歷經六百多年，機械零件與齒輪依然維持精準運轉與整點生動報時",
+            "天文鐘外表的花紋每年都會像植物一樣抽出綠芽",
+            "時鐘敲鐘的音量比現代的防空警報還要大聲"
+          ],
+          correct: 2,
+          explanation: "「非常有活力」是以擬人手法形容古老的天文鐘機械歷經六個世紀依然完好無損、生生不息地運作著。",
+          quote: "段落[P3]：「這座鐘已經『活』了六百多歲了，但它到現在都還非常有活力！每到整點，天文鐘周圍就會擠滿興奮的遊客。」"
+        },
+
+        // 第三層：批判評價 (4題)
+        {
+          id: 9,
+          level: 3,
+          question: "課文以「科學與藝術的完美結合」作為段落標題，下列哪一項分析最能客觀支撐這項評價？",
+          options: [
+            "內在擁有精密的數學運算齒輪系統（科學），外在展現雕刻偶與金雞的動態展演美感（藝術）",
+            "只要造價很昂貴且全身鍍金，就能稱得上是科學與藝術",
+            "因為參觀天文鐘需要買門票，所以它屬於經濟藝術而不是純科學",
+            "只要在機械外殼隨意畫上風景圖案就是完美的科學結合"
+          ],
+          correct: 1,
+          explanation: "天文鐘之偉大正在於它不只是冷冰冰的齒輪機械（科學），更融入了精雕細琢的宗教與哲思木偶藝術（美學），二者交融並存。",
+          quote: "段落[P3]、[P4]內容對動態木雕藝術秀與內部大小齒輪精密數學知識的相互印證。"
+        },
+        {
+          id: 10,
+          level: 3,
+          question: "作者在文章開頭以「你聽過會跳舞、還會看星星的時鐘嗎？」破題，從寫作策略來看，主要用意是什麼？",
+          options: [
+            "作者自己很想知道答案，希望讀者寄信告訴他",
+            "批評家裡普通的時鐘太無聊、沒有任何功能",
+            "為了湊足兒童刊物的規定文章篇幅",
+            "運用生動擬人與設問手法，激發讀者的好奇心與閱讀探究慾望"
+          ],
+          correct: 4,
+          explanation: "設問與擬人開頭能抓住四年級小學生的好奇心，使文章一開始就充滿童趣與吸引力。",
+          quote: "段落[P1]：「你聽過會跳舞、還會看星星的時鐘嗎？在 600 多年前的歐洲……」"
+        },
+        {
+          id: 11,
+          level: 3,
+          question: "作者在文章中拿天文鐘和現代常見的「咕咕鐘」相比，並評價天文鐘「好玩幾百倍」，其評斷的依據是什麼？",
+          options: [
+            "因為咕咕鐘的木材品質不如天文鐘的木雕人偶",
+            "天文鐘除了金雞報時，還有骷髏響鈴與十二門徒窗口走秀等多角色豐富展演",
+            "因為現代咕咕鐘走得太快，讓人覺得壓力很大",
+            "因為咕咕鐘只能掛在牆上，無法放在室外給大眾看"
+          ],
+          correct: 2,
+          explanation: "相較於一般咕咕鐘只有單隻鳥探頭鳴叫，天文鐘具備多個角色、寓意深刻的走秀連動，層次更為豐富有趣。",
+          quote: "段落[P3]：「骷髏人會搖動鈴鐺……十二位耶穌的弟子會像走秀一樣……最後頂端金色公雞高聲啼叫……這比現在的『咕咕鐘』還要好玩幾百倍呢！」"
+        },
+        {
+          id: 12,
+          level: 3,
+          question: "讀完本文後，若要對天文鐘在人類科技文明史上的價值做一個最公允的評價，下列何者最適切？",
+          options: [
+            "它只是一件落伍的古董，現代有手機就可以完全將它遺忘",
+            "它是古代隨意拼湊的木雕大玩具，沒有任何科學技術可言",
+            "它凝聚了古代天文學、精密機械與雕刻工藝的巔峰，是人類智慧跨越時空的偉大見證",
+            "它的製作全靠運氣，後代工匠根本無法理解它的任何結構"
+          ],
+          correct: 3,
+          explanation: "天文鐘歷經六百年依然運作，證明了古代工匠與科學家極高的智慧與精密工藝，是不可抹滅的文明瑰寶。",
+          quote: "段落[P4]、[P5]：「這需要非常精準的數學和天文知識才能做得出來……天文鐘就像是一位不休息的宇宙魔術師。」"
+        },
+
+        // 第四層：應用創造 (4題)
+        {
+          id: 13,
+          level: 4,
+          question: "若學校圖書館要為這篇文章辦一場主題書展，想設計一句最能吸引同學借閱的推廣標語，哪一句最合適？",
+          options: [
+            "請大家每天準時睡覺，不要看太晚的書！",
+            "時鐘壞了不用修，買新的最划算！",
+            "把整個宇宙裝進齒輪裡！快來布拉格看活了六百歲的魔法科技鐘！",
+            "考試記得帶手錶，以免寫不完試卷！"
+          ],
+          correct: 3,
+          explanation: "第三句文案融合了「宇宙」、「齒輪」、「六百歲」、「魔法科技鐘」等文章核心意象，最具啟發性與吸引力。",
+          quote: "綜合課文[P1]、[P2]、[P3]的精華元素創造。"
+        },
+        {
+          id: 14,
+          level: 4,
+          question: "如果你到布拉格天文鐘前當小導覽員，要教四年級的同學們如何看懂神奇錶盤，你應該引導大家觀察哪些資訊？",
+          options: [
+            "看看時鐘底部有沒有可以投硬幣的孔洞",
+            "觀察錶盤上的太陽走到哪個星座、今天月亮的圓缺月相以及年份與月份",
+            "尋找錶盤上有沒有隱藏的現代Wi-Fi無線網路密碼",
+            "檢查木雕人偶身上有沒有貼價錢標籤"
+          ],
+          correct: 2,
+          explanation: "天文鐘錶盤的設計核心就是呈現太陽對應的黃道十二星座、月相盈虧與日曆年份月份。",
+          quote: "段落[P2]：「現在太陽走到哪一個星座了、今天的月亮是圓的還是彎的，甚至連今年是哪一年、哪一個月份，它都能清清楚楚地告訴你。」"
+        },
+        {
+          id: 15,
+          level: 4,
+          question: "若你想將天文鐘的「生活指引與趣味報時」原理應用在自己的國小校園鐘樓，下列哪一個創意最能體現同理心與實用價值？",
+          options: [
+            "每逢考試時間發出大卡車喇叭聲考驗同學專注力",
+            "在整點時向經過走廊的同學身上潑冷水醒腦",
+            "時鐘上裝滿尖刺，防止小麻雀在上面築巢",
+            "整點播放輕快音樂，由校園動物吉祥物木偶探頭，提醒大家下課多喝水、眺望遠方保護眼睛"
+          ],
+          correct: 4,
+          explanation: "第四項創意巧妙將木偶報時與關懷同學視力健康、飲水提醒結合，真正發揮了科技指引生活的美意。",
+          quote: "應用課文[P3]木雕小人報時秀與[P4]生活指引理念之創造延伸。"
+        },
+        {
+          id: 16,
+          level: 4,
+          question: "課文提到天文鐘內部「成百上千個大小齒輪緊密扣合，轉速快慢不同卻能共同運轉」，這帶給我們在班級團隊合作中什麼深刻啟發？",
+          options: [
+            "每位同學就像不同速度的齒輪，各有專長與節奏，只要同心協力扣合互補，就能成就非凡目標",
+            "小組只要由轉得最快的那顆齒輪做事就好，其他慢齒輪都可以停下來偷懶",
+            "只要轉動速度和別人不一樣的齒輪，就是壞齒輪，必須立刻排擠他",
+            "大家必須讓自己的個性和能力變得跟班長一模一樣才能開始工作"
+          ],
+          correct: 1,
+          explanation: "大小齒輪轉速各異（有的一年轉一圈，有的快速轉動），缺一不可；團隊也是如此，懂得尊重個別差異、緊密配合才能成就不凡。",
+          quote: "段落[P4]：「內部充滿了成百上千個大小不同的齒輪，彼此緊緊扣在一起。每一個齒輪轉動的速度都不一樣……這需要非常精準的數學和天文知識才能做得出來。」"
+        }
+      ]
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# 排除原始 PDF，避免未授權公開上傳
+閱讀內容.pdf
+*.pdf
+*.log
+render_pdf.ps1
+convert_pdf.ps1
